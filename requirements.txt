@@ -4,6 +4,7 @@ Django==2.1.4
 django-resized==0.3.9
 gunicorn==19.9.0
 Pillow==5.4.1
+psycopg2==2.7.7
 pytz==2018.7
 sorl-thumbnail==12.5.0
 static3==0.7.0
