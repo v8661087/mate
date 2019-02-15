@@ -1,0 +1,52 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}編輯個人檔案{% endblock %}
+{% block content %}
+    <div class="setting-form">
+        <div class="setting-title">
+            <ul>
+            <li><a href="/accounts/edit/">編輯個人檔案</a></li>
+            <li><a href="/accounts/password_change/">更改密碼</a></li>
+            <li><a href="/accounts/edit/">已授權的應用程式</a></li>
+            <li><a href="/accounts/edit/">電子郵件和簡訊</a></li>
+            <li><a href="/accounts/edit/">管理聯絡人</a></li>
+            <li><a href="/accounts/edit/">隱私設定與帳號安全</a></li>
+            </ul>
+        </div>
+        <div class="setting-article">
+            <article>
+            <form action="" method="post" enctype="multipart/form-data" id="form1">
+                {% thumbnail user.profile.photo "50x50" as im %}
+                    <a href="#ex1" rel="modal:open"><img src="{{ im.url }}" class="userdetail-profile-photo"></a>
+                {% endthumbnail %}
+                <!-- Link to open the modal -->
+
+                    <p>{{ user }}<br/>
+                        <a href="#ex1" rel="modal:open" style="color: rgb(15,238,148)">變更大頭貼照</a>
+                    </p>
+                <!-- Modal HTML embedded directly into document -->
+            <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
+                    <script>
+                       function photo() {
+                           $("#id_photo").click();
+                       }
+                        function submit(){
+                           $("#form1").submit()
+                        }
+                  </script>
+                <div id="ex1" class="modal">
+                        <h3>變更大頭貼照</h3>
+                        <button type="button" onclick = "photo();">上傳相片</button>
+                        <button onclick="location.href=''" style="color: #ff4060">移除目前的大頭貼照</button>
+                        <button onclick="location.href=''">取消</button>
+                    </div>
+                {{ user_form.as_p }}
+
+                {% csrf_token %}
+                <p><input type="submit" value="提交"></p>
+            </form>
+            </article>
+        </div>
+    </div>
+{% endblock %}

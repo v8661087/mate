@@ -1,0 +1,9 @@
+{% load staticfiles %}
+ <link href="{% static "css/base2.css" %}" rel="stylesheet">
+{% for image in images %}
+    <div class="image">
+        <a href="{{ image.get_absolute_url }}">
+            <img src="{{ image.image.url }}" class="user-image-list">
+        </a>
+    </div>
+{% endfor %}

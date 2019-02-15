@@ -1,0 +1,143 @@
+{% extends "base2.html" %}}
+{% load thumbnail %}
+{% load staticfiles %}
+{% block title %}{{ user.get_full_name }}(@{{ user }})
+
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="user-container">
+        <div class="user-head">
+            <div class="userdetail-profile-photo">
+                {% thumbnail user.profile.photo "200x200" crop="20%" as im %}
+                    {% if request.user == user %}
+                        <form action="" method="post" enctype="multipart/form-data" id="form2">
+                            <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
+                            {% csrf_token %}
+                        </form>
+                        <script>
+                       function photo() {
+                           $("#id_photo").click();
+                       }
+                        function submit(){
+                           $("#form2").submit()
+                        }
+                  </script>
+                        {% if user.profile.photo == 'users/default.jpg' %}
+                            <img src="{{ im.url }}" onclick="photo()" style="cursor: pointer" title="更換大頭貼照">
+                            {% else %}
+                              <a href="#ex2" rel="modal:open"><img src="{{ im.url }}"></a>
+                            <div id="ex2" class="modal">
+                                <h3>變更大頭貼照</h3>
+                                <button onclick="photo()">上傳相片</button>
+                                <button onclick="">移除目前的大頭貼照</button>
+                                <button onclick="location.href=''">取消</button>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <img src="{{ im.url }}">
+                    {% endif %}
+                {% endthumbnail %}
+
+            </div>
+            <div class="userdetail-profile">
+                <p><a style="font-size: x-large">{{ user }}</a>
+
+                {% if request.user == user %}
+                    <a href="/accounts/edit/" class="edit">編輯個人檔案</a>
+
+                    <!-- Link to open the modal -->
+                    <a href="#ex1" rel="modal:open"><button>選項</button></a>
+                    <!-- Modal HTML embedded directly into document -->
+                    <div id="ex1" class="modal">
+                        <button onclick="location.href='/accounts/password_change/'">更改密碼</button>
+                        <button onclick="location.href=''">名牌</button>
+                        <button onclick="location.href=''">授權的應用程式</button>
+                        <button onclick="location.href=''">通知</button>
+                        <button onclick="location.href=''">隱私設定和帳號安全</button>
+                        <button onclick="location.href='/accounts/logout/'">登出</button>
+                        <button onclick="location.href=''">取消</button>
+                    </div>
+
+
+                    </p>
+                    <p>
+                    <a href="/accounts/edit/">貼文</a>
+                    <a href="/">{{ user.followers.count }}追蹤者</a>
+                    <a href="/accounts/edit/">{{ user.follows.count }}追蹤中</a>
+                {% else %}
+                    <a href="/accounts/login/">追蹤</a>
+                {% endif %}
+
+                   </p>
+
+                    <p><a>{{ user.get_full_name }}</a></p>
+                    <p>
+                        <a href="#" data-id="{{ user.id }}" data-action="
+                            {% if request.user in user.followers.all %}un
+                        {% endif %}follow" class="follow button">
+                            {% if request.user not in user.followers.all %}
+                                Follow
+                            {% else %}
+                                Unfollow
+                            {% endif %}
+                        </a>
+                    </p>
+
+            </div>
+        </div>
+    <div class="user-bottom">
+        <hr>
+            <div class="userdetail-button">
+                {% if request.user == user %}
+                    <p><a href="">貼文</a>
+                    <a href="">IGTV</a>
+                    <a href="">我的珍藏</a>
+                    <a href="">已標註</a>
+                {% else %}
+                    <a href="">貼文</a>
+                    <a href="">已標註</a>
+                {% endif %}
+                    </p>
+            </div>
+            {% if request.user == user %}
+            <p><a href="/images/create/">add images</a></p>
+            {% endif %}
+                <div id="image-list">
+                    {% include "images/image/list_ajax.html" with images=user.images_created.all %}
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block domready %}
+    $('a.follow').click(function(e){
+        e.preventDefault();
+        $.post('{% url "user_follow" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('a.follow').data('action');
+
+                    // toggle data-action
+                    $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow');
+                    // toggle link text
+                    $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow');
+
+                    // update total followers
+                    var previous_followers = parseInt($('span.count .total').text());
+                    $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1);
+                }
+        });
+    });
+
+
+
+
+{% endblock %}

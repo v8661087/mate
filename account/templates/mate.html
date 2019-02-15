@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Mate{% endblock %}
+
+{% block content %}
+    <div class="form1">
+            <form action="." method="post">
+                <h1>Mate</h1>
+                <a>註冊即可查看朋友的相片和影片。</a>
+                {{ user_form.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" value="註冊"></p>
+                <p>註冊即表示你同意我們的 服務條款 、 <br/>資料政策 和 Cookie 政策 。</p>
+            </form>
+
+   </div>
+    <br/>
+    <div class="form2">
+        <p>已經有帳號嗎?<a href="/accounts/login/" class="href">&nbsp;登入</a></p>
+    </div>
+{% endblock %}

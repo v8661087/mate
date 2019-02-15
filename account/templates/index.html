@@ -1,0 +1,30 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}Mate{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="sidebar_left">
+        {% if actions %}
+            {% for action in actions %}
+                {% include "actions/action/detail.html" %}
+            {% endfor %}
+        {% else %}
+            <p>目前沒有動態</p>
+        {% endif %}
+        </div>
+
+        <div class="sidebar_right">
+            {% thumbnail request.user.profile.photo "60x60" crop="20%" as im %}
+                <a href="/{{ request.user }}"><img src="{{ im.url }}" id="index-request-user"></a>
+            {% endthumbnail %}
+                <a href="/{{ request.user }}" id="index-request-username">{{ request.user }}</a>
+                <br/>
+                <br/>
+            <div class="limit">
+                <a>限時動態</a><a >全部觀看</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

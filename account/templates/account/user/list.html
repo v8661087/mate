@@ -1,0 +1,29 @@
+{% extends "base2.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="explore-users">
+        <p>探索用戶</p>
+        <div id="people-list">
+           {% for user in users %}
+             <div class="user">
+                 <a href="/{{ user }}/"><img src="{{ user.profile.photo.url }}"></a>
+               <div class="info">
+                 <a href="{{ user.get_absolute_url }}" class="title">
+                   {{ user }}
+                 </a>
+               </div>
+             </div>
+           {% endfor %}
+        </div>
+    </div>
+    <div class="explore">
+        <p>探索</p>
+        <div id="image-list">
+            {% for user in users %}
+             {% include "images/image/list_ajax.html" with images=user.images_created.all %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
