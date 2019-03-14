@@ -1,7 +1,6 @@
 from django import forms
-from .models import Image
-from PIL import Image as Image2
-from django.core.files import File
+from .models import Image, Comment
+
 
 class ImageCreateForm(forms.ModelForm):
 
@@ -11,5 +10,11 @@ class ImageCreateForm(forms.ModelForm):
         fields = ('title',  'image', 'description',)
 
 
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': '留言‧‧‧‧‧'}))
 
+
+    class Meta:
+        model = Comment
+        fields = ('body', )
 

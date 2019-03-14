@@ -1,0 +1,34 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}通知‧Mate{% endblock %}
+{% block content %}
+    <div class="setting-form" style="height: 800px">
+        <div class="setting-title">
+                       <li ><a href="/accounts/edit/" ><button>編輯個人檔案</button></a></li>
+            <li><a href="/accounts/password_change/"><button>更改密碼</button></a></li>
+            <li ><a href="/accounts/manage_access/"><button >已授權的應用程式</button></a></li>
+            <li style="border-left: 2px solid white;"><a href="/emails/settings/"><button style="color: white">電子郵件和簡訊</button></a></li>
+            <li ><a href="/accounts/contact_history/"><button >管理聯絡人</button></a></li>
+            <li><a href="/accounts/privacy_and_security/"><button>隱私設定與帳號安全</button></a></li>
+        </div>
+        <div class="setting-article">
+                <h3>訂閱：</h3>
+
+           <p> <input type="checkbox" style="width: 30px" checked>新消息電子郵件<br/>
+                搶先瞭解新產品。</p>
+
+            <p><input type="checkbox" style="width: 30px" checked>提醒電子郵件<br/>
+            隨時掌握新消息，不錯過任何內容。</p>
+
+            <p><input type="checkbox" style="width: 30px" checked>產品電子郵件<br/>
+            取得使用 Instagram 工具的提示。</p>
+
+           <p> <input type="checkbox" style="width: 30px" checked>研究電子郵件<br/>
+            提供意見回饋並參與研究調查。</p>
+
+            <p><input type="checkbox" style="width: 30px" checked>簡訊<br/>
+            透過簡訊接收提醒通知。</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}隱私設定與帳號安全‧Mate{% endblock %}
+{% block content %}
+    <div class="setting-form" style="height: 1300px">
+        <div class="setting-title">
+            <li ><a href="/accounts/edit/" ><button>編輯個人檔案</button></a></li>
+            <li><a href="/accounts/password_change/"><button>更改密碼</button></a></li>
+            <li ><a href="/accounts/manage_access/"><button >已授權的應用程式</button></a></li>
+            <li><a href="/emails/settings/"><button>電子郵件和簡訊</button></a></li>
+            <li ><a href="/accounts/contact_history/"><button >管理聯絡人</button></a></li>
+            <li style="border-left: 2px solid white;"><a href="/accounts/privacy_and_security/"><button style="color: white">隱私設定與帳號安全</button></a></li>
+        </div>
+        <div class="setting-article">
+               <h2> 帳號隱私設定</h2>
+
+<input type="checkbox" style="width: 30px">不公開帳號<br/>
+Instagram 帳號設為不公開時，只有經過你認可的用戶可以看見你的相片和影片。你現有的粉絲不會受到影響。
+
+            <h2>活動狀態</h2>
+
+<input type="checkbox" style="width: 30px">顯示活動狀態<br/>
+允許你追蹤的用戶和訊息往來對象看到你上次使用 Instagram 應用程式的時間。當你關閉此功能時，也將無法看到其他用戶的上線狀態。
+
+<h2>限時動態分享</h2>
+
+<input type="checkbox" style="width: 30px">允許分享<br/>
+允許用戶以訊息的方式分享你的限時動態
+
+<h2>留言</h2>
+編輯留言設定
+<h2>有你在內的相片</h2>
+
+自動新增
+手動新增
+選擇要如何將有你在內的相片新增到個人檔案。 深入瞭解 有你在內的相片。
+
+<h2>帳號資料</h2>
+查看帳號資料
+<h2>雙重驗證</h2>
+編輯雙重驗證設定
+<h2>資料下載</h2>
+要求下載
+<h2>隱私設定和帳號安全說明</h2>
+支援
+        </div>
+    </div>
+{% endblock %}

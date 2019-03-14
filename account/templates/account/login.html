@@ -9,12 +9,15 @@
                 <h1>Mate</h1>
                 {{ form.as_p }}
                 {% csrf_token %}
+                <a href="" class="href" style="margin-left: 200px">忘記密碼?</a>
                 <p><input type="submit" value="登入"></p>
-                <p><a href="" class="href">忘記密碼?</a></p>
             </form>
     </div>
     &nbsp;
     <div class="form2">
         <p><a>沒有帳號嗎?</a><a href="/accounts/register/"class="href"> 註冊</a></p>
+    </div>
+    <div style="text-align: center;">
+
     </div>
 {% endblock %}

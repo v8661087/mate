@@ -4,26 +4,50 @@
 
 {% block content %}
     <div class="explore-users">
-        <p>探索用戶</p>
-        <div id="people-list">
-           {% for user in users %}
-             <div class="user">
-                 <a href="/{{ user }}/"><img src="{{ user.profile.photo.url }}"></a>
-               <div class="info">
-                 <a href="{{ user.get_absolute_url }}" class="title">
-                   {{ user }}
-                 </a>
-               </div>
-             </div>
-           {% endfor %}
+        <p>探索用戶<a href="people/suggested/" style="float: right;color: #0e6ac0">查看全部</a></p>
+            <blockquote>推薦用戶<a href="people/suggested/" style="float: right;color: #0e6ac0">查看全部</a></blockquote>
+        <button id="left"> < </button>
+        <button id="right"> > </button>
+
+        <div class="people">
+            <div id="people-list">
+               {% for user in users %}
+                    {% if user == request.user %}
+                    {% else %}
+                    <div class="user">
+                     <a href="/{{ user }}/"><img src="{{ user.profile.photo.url }}"></a>
+                    <div class="info">
+                     <p><a href="{{ user.get_absolute_url }}" class="title">{{ user }}</a></p>
+                   </div>
+                 </div>
+                {% endif %}
+               {% endfor %}
+            </div>
         </div>
     </div>
+
     <div class="explore">
         <p>探索</p>
         <div id="image-list">
             {% for user in users %}
-             {% include "images/image/list_ajax.html" with images=user.images_created.all %}
+                {% include "images/image/list_ajax.html" with images=user.images_created.all %}
             {% endfor %}
         </div>
     </div>
 {% endblock %}
+
+{% block domready %}
+
+
+    var outer = $('.people');
+
+            $('#right').click(function() {
+               outer.animate({scrollLeft: '+=700px'}, 1000);
+            });
+
+            $('#left').click(function() {
+               outer.animate({scrollLeft: '-=700px'}, 1000);
+            });
+
+{% endblock %}
+

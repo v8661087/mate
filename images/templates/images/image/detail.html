@@ -1,27 +1,236 @@
-{% extends "base2.html" %}
+{% extends "base3.html" %}
 
-{% block title %}{{ image.title }}{% endblock %}
+{% block title %}
+    {% if image.description %}
+    Mate上的
+        {% if image.user.profile.full_name %}
+            {{ image.user.profile.full_name }}
+        {% else %}
+            @{{ image.user }}
+        {% endif %}
+    ：「{{ image.description }}」
+    {% else %}
+        @{{ image.user }}的Mate相片‧{{ image.created }}
+    {% endif %}
+
+{% endblock %}
 
 {% block content %}
-    <img src="{{ image.image.url }}" class="image-detail">
-    {% with total_likes=image.users_like.count users_like=image.users_like.all %}
+
+    <style>
+    .modal{
+        display: none;
+    }
+    </style>
+    <div class="image-detail-all">
+        <div>
+            <img src="{{ image.image.url }}" ondblclick="like_or_unlike()" class="image-detail">
+        </div>
+        {% with total_likes=image.users_like.count users_like=image.users_like.all %}
         <div class="image-info">
-                <div>
-                    <span class="count">
-                        <span class="total">{{ total_likes }}</span>
-                        like{{ total_likes|pluralize }}
-                    </span>
-                    <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
-                        {% if request.user not in users_like %}
-                            Like
+            <header class="image-detail-header">
+                <div style="height: 40px;display: flex" >
+                    <a href="/{{ image.user }}"><img src="{{ user.profile.photo.url }}" class="image-detail-user-image">
+                    </a>
+                       <div style="padding-top: 10px">
+                           <a href="/{{ image.user }}" style="margin-left:15px;">{{ image.user }}</a>
+                        </div>
+                    {% if image.user == request.user %}
+                    {% else %}
+                        <span style="margin: 5px">‧</span>
+                    <a href="#ex7" rel="modal:open" type="button" style="padding-top: 8px">追蹤中</a>
+                    <div id="ex7" class="modal">
+                        <img src="{{ user.profile.photo.url }}" style="width: 90px; border-radius: 50%">
+                        <br/><a>取消追蹤@{{ image.user }}?</a><hr/>
+                        <button onclick="unfollow()" style="color: #ff4060">取消追蹤</button>
+                         <a href="#" rel="modal:close"  ><button>取消</button></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </header>
+        <div class="comment" style="border-bottom: 1px solid #bfbfbf">
+
+        {% if image.description %}
+            <script>
+                window.onload = comment;
+            function comment(){
+                 $('.comment').css("min-height","520px");
+            }
+            </script>
+            <a href="/{{ image.user }}/">{{ image.user }}</a> {{ image.description|linebreaks }}
+
+        {% endif %}
+
+                {% for comment in comments %}
+                    {% if comments %}
+                        <script>
+                            window.onload = comment;
+                        function comment(){
+                             $('.comment').css("min-height","520px");
+                        }
+                        </script>
+                        <p class="info"></p>
+                        <li style="list-style-type: none" ><a href="/{{ comment.user }}/" onload="comment()" style="margin: 0px 5px 0px 0px">{{ comment.user }}</a>{{ comment.body }}
+                        <img src="../../../../media/heart.png" style="float: right"></li>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        <section style="margin-top: 5px">
+                {% if request.user in users_like.all  %}
+                    {% if total_likes >= 2 %}
+                        <button style="border:0;background-color: #17181c;" onclick="like_or_unlike()"><img src="https://i.imgur.com/mj4UOAf.png" id="imgClickAndChange" style="cursor: pointer"></button>
+                    {% else %}
+                        <button style="border:0;background-color: #17181c;" onclick="like_or_unlike();zerolike()"><img src="https://i.imgur.com/mj4UOAf.png" id="imgClickAndChange" style="cursor: pointer"></button>
+                    {% endif %}
+                {% else %}
+                    {% if total_likes >= 1 %}
+                        <button style="border:0;background-color: #17181c;" onclick="like_or_unlike()"><img src="https://i.imgur.com/07ZkyYW.png" id="imgClickAndChange" style="cursor: pointer"></button>
+                    {% else %}
+                        <button style="border:0;background-color: #17181c;" onclick="like_or_unlike();firstlike()"><img src="https://i.imgur.com/07ZkyYW.png" id="imgClickAndChange" style="cursor: pointer"></button>
+                    {% endif %}
+                {% endif %}
+
+                    <button style="border:0;background-color: #17181c;" onclick="comment_focus()"><img src="../../../../media/message.png" style="cursor: pointer"></button>
+                    <button style="border:0;background-color: #17181c;"><a href="#share" rel="modal:open"><img src="../../../../media/share.png"></a></button>
+                {% if image in request.user.images_saved.all %}
+                   <button style="border:0;background-color: #17181c;float: right" onclick="saved_or_unsaved()"><a style="float: right"><img src="https://i.imgur.com/rLeQz4v.png" id="saved_image"></a></button>
+                {% else %}
+                    <button style="border:0;background-color: #17181c;float: right" onclick="saved_or_unsaved()"><a style="float: right"><img src="https://i.imgur.com/hFOBgj0.png" id="saved_image"></a></button>
+                {% endif %}
+        <div id="share" class="modal">
+            <h3>分享</h3>
+            <h4>分享到Facebook</h4>
+            <h4>分享到Messanger</h4>
+            <h4>分享到Twitter</h4>
+            <h4>透過電子郵件分享</h4>
+            <h4>複製連結</h4>
+            <a href="#" rel="modal:close">取消</a>
+
+        </div>
+
+        </section>
+        <script>
+           function firstlike() {
+                    if( document.getElementById('first').innerHTML === '成為第一個<a onclick="like_or_unlike();firstlike()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'){
+                    document.getElementById('first').innerHTML = '<a href="#ex9" rel="modal:open"><span class="count"  id="count"><span class="total" id="total">{{ total_likes }}</span>個讚</span></a>'
+                    }
+                    else {
+                        document.getElementById('first').innerHTML = '成為第一個<a onclick="like_or_unlike();firstlike()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }
+                }
+            function zerolike() {
+                    if (document.getElementById('first').innerHTML === '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">1</span>個讚</span></a>' && document.getElementById('like').innerText === 'Unlike'){
+                        document.getElementById('first').innerHTML = '成為第一個<a onclick="like_or_unlike();firstlike2()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }else {
+                        document.getElementById('first').innerHTML = '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">0</span>個讚</span></a>'
+                    }
+                }
+
+           function firstlike2() {
+                    if( document.getElementById('first').innerHTML === '成為第一個<a onclick="like_or_unlike();firstlike2()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'){
+
+
+                    document.getElementById('first').innerHTML = '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">0</span>個讚</span></a>'
+                    }else {
+                        document.getElementById('first').innerHTML = '成為第一個<a onclick="like_or_unlike();firstlike2()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }
+                }
+
+       </script>
+        <div style="border-bottom: 1px solid #bcbcbc;">
+        {% if total_likes == 0 %}
+            <span id="first">成為第一個<a onclick="like_or_unlike();firstlike()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人</span>
+
+
+        {% else %}
+            <span id="first"><a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">{{ total_likes }}</span>個讚</span></a></span>
+
+        {% endif %}
+            <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button" id="like" style="display: none">{% if request.user not in users_like %}Like{% else %}Unlike{% endif %}</a>
+
+            <div id="ex9" class="modal" style="height: 500px;">
+                <div><p>說讚的用戶</p></div><hr/>
+                    <div style="padding: 10px">
+                        {% for user in users_like.all %}
+                            <div style="display: flex;margin-bottom: 5px">
+                               <div style="flex: none"><a href="/{{ user }}/"> <img src="{{ user.profile.photo.url }}" style="width: 44px;border-radius: 50%"></a></div>
+                                <div style="flex: none;margin: 10px 0 0 10px"><a href="/{{ user }}/">{{ user }}</a></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </div>
+
+
+        <a href="#" data-id="{{ image.id }}" data-action="{% if image in user.images_saved.all %}un{% endif %}saved" class="saved button" style="display: none">
+                        {% if image not in user.images_saved.all %}
+                            Saved
                         {% else %}
-                            Unlike
+                            Unsaved
                         {% endif %}
                     </a>
-                </div>
-            {{ image.description|linebreaks }}
+
+            <div style="margin-bottom:5px">
+                <a title="{{ image.created }}" style="font-size: 14px;color: #cacaca">{{ image.when_published }}</a>
+            </div>
         </div>
-    {% endwith %}
+            <section style="margin-top: 20px">
+                    <form action="." method="post" onsubmit="return dosubmit()" id="comment-form">
+                        <input type="text" name="body" placeholder="留言‧‧‧‧‧"  id="id_body" autocomplete="off"  style="background-color: #17181c;border: none;outline: none;padding: 0px">
+                        {% csrf_token %}
+                    </form>
+            </section>
+        </div>
+        {% endwith %}
+
+    </div>
+    <script>
+
+        function dosubmit(){
+     //获取表单提交按钮
+     var btnSubmit = document.getElementById("submit");
+     //将表单提交按钮设置为不可用，这样就可以避免用户再次点击提交按钮
+     btnSubmit.disabled= "disabled";
+     //返回true让表单可以正常提交
+     return true;
+    }
+
+
+     function comment_focus() {
+            $('#id_body').focus();
+     }
+
+     function like_or_unlike() {
+         $('.like').click();
+         var img = document.getElementById("imgClickAndChange");
+         if (img.src === "https://i.imgur.com/mj4UOAf.png"){
+            img.src = "https://i.imgur.com/07ZkyYW.png"
+         }
+         else {
+             img.src = "https://i.imgur.com/mj4UOAf.png"
+         }
+
+     }
+
+
+
+     function saved_or_unsaved() {
+            $('.saved').click();
+        var img2 = document.getElementById("saved_image");
+        if (img2.src === "https://i.imgur.com/rLeQz4v.png"){
+            img2.src = "https://i.imgur.com/hFOBgj0.png"
+        }else {
+            img2.src = "https://i.imgur.com/rLeQz4v.png"
+        }
+
+     }
+
+     function unfollow() {
+         $('.follow').click();
+     }
+    </script>
+
+
 {% endblock %}
 
 {% block domready %}
@@ -45,6 +254,29 @@
                     // update total likes
                     var previous_likes = parseInt($('span.count .total').text());
                     $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+                }
+        });
+
+    });
+
+    $('a.saved').click(function(e){
+        e.preventDefault();
+        $.post('{% url "images:saved" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('a.saved').data('action');
+
+                    // toggle data-action
+                    $('a.saved').data('action', previous_action == 'saved' ? 'unsaved' : 'saved');
+                    // toggle link text
+                    $('a.saved').text(previous_action == 'saved' ? 'Unsaved' : 'Saved');
+
+
                 }
         });
 

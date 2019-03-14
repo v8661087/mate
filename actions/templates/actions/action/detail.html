@@ -1,29 +1,74 @@
-{% load thumbnail %}
-
-{% with user=action.user profile=action.user.profile  %}
+    {% if actions %}
     <div class="actions">
-            <div class="images">
-                {% if profile.photo %}
-                    {% thumbnail user.profile.photo "50x50" crop="30%" as im %}
-                        <a href="{{ user.get_absolute_url }}">
-                            <img src="{{ im.url }}" class="item-img"><a href="{{ user.get_absolute_url }}" class="action-user">{{ user }}</a>
-                        </a>
-                    {% endthumbnail %}
-                {% endif %}
+            <div>
+                <a href="{{ action.user.get_absolute_url }}">
+                    <img src="{{ action.user.profile.photo.url }}" class="item-img">
+                    <p><a href="{{ action.user.get_absolute_url }}" title="{{ action.user }}" class="action-user">{{ action.user }}</a>
+                </p></a>
             </div>
 
-        <div class="action-photo">
-		{% if action.target %}
 			{% with target=action.target %}
-                {% if target.image %}
-                    <img src="{{ target.image.url }}">
-                    <a href="{{ user.get_absolute_url }}" >{{ user }}</a>
-                    {{ target.descriptions}}
-                {% endif %}
-			{% endwith %}
-		{% endif %}
-        </div>
-        {{ action.created|timesince }}前
-	</div>
+                    <img src="{{ target.image.url }}" class="action-image">
+             <div style="margin: 0px 20px;">
+                <img src="../../../../media/heart.png" >
+                <img src="../../../../media/message.png">
+                <img src="../../../../media/share.png">
+                <img src="../../../../media/saved.png" style="float: right">
+                <br/>
+                {% with total_likes=target.users_like.count users_like=target.users_like.all %}
+                    <div class="image-info2">
+                            <div>
+                                <span class="count">
+                                    <span class="total">{{ total_likes }}</span>
+                                    個讚
+                                </span>
+                                <a href="#" data-id="{{ target.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button" style="display: none">
+                                    {% if request.user not in users_like %}
+                                        Like
+                                    {% else %}
+                                        Unlike
+                                    {% endif %}
+                                </a>
+                            </div>
 
-{% endwith %}
+                    </div>
+                {% endwith %}
+
+                <a href="{{ action.user.get_absolute_url }}" title="{{ action.user }}">{{ action.user }}</a>
+                <a>{{ target.description|linebreaks }}</a>
+                id:{{ action.target.id }}
+                slug:{{ action.target.slug }}
+                title:{{ action.target.title }}
+
+                {% for comment in comments %}
+                    <p class="info"></p>
+                    <li style="list-style-type: none"><a href="/{{ comment.user }}/" style="margin: 0px 5px 0px 0px">{{ comment.user }}</a>{{ comment.body }}
+                    <img src="../../../../media/heart.png" style="float: right"></li>
+                {% empty %}
+                {% endfor %}
+
+                <br/>
+                <a href="{{ action.target.get_absolute_url }}" style="font-size: 14px;color: #cacaca">{{ action.when_published }}</a>
+                <hr/>
+			    <section style="height: 50px;">
+                    <form action="." method="post" onsubmit="return dosubmit()" id="comment-form">
+                        <input type="text" name="body" placeholder="留言‧‧‧‧‧"  id="id_body" autocomplete="off">
+                        {% csrf_token %}
+                    </form>
+                </section>
+            {% endwith %}
+        </div>
+	</div>
+{% else %}
+    目前沒有動態
+{% endif %}
+<script>
+    function dosubmit(){
+     //获取表单提交按钮
+     var btnSubmit = document.getElementById("submit");
+     //将表单提交按钮设置为不可用，这样就可以避免用户再次点击提交按钮
+     btnSubmit.disabled= "disabled";
+     //返回true让表单可以正常提交
+     return true;
+    }
+</script>

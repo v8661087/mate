@@ -1,0 +1,34 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}管理聯絡人‧Mate{% endblock %}
+{% block content %}
+    <div class="setting-form" style="height: 800px">
+        <div class="setting-title">
+
+            <li ><a href="/accounts/edit/" ><button>編輯個人檔案</button></a></li>
+            <li><a href="/accounts/password_change/"><button>更改密碼</button></a></li>
+            <li><a href="/accounts/manage_access/"><button>已授權的應用程式</button></a></li>
+            <li><a href="/emails/settings/"><button>電子郵件和簡訊</button></a></li>
+            <li style="border-left: 2px solid white;"><a href="/accounts/contact_history/"><button style="color: white">管理聯絡人</button></a></li>
+            <li><a href="/accounts/privacy_and_security/"><button>隱私設定與帳號安全</button></a></li>
+
+        </div>
+        <div class="setting-article">
+            <h2>管理聯絡人</h2><hr/>
+            <p>此處列出你上傳到 Instagram 的聯絡人。
+                若要移除已同步的聯絡人，請點按「全部刪除」。
+                如果從這個頁面刪除聯絡人，系統仍會上傳你新增到手機的聯絡人
+                。若要停止同步，請前往裝置設定並關閉聯絡人使用權限。</p>
+
+                <p>只有你能查看自己的聯絡資料，
+                    但 Instagram 會使用你上傳的聯絡人相關資料，
+                    為你和其他人提供交友建議，以提升所有人的使用體驗。
+                </p>
+            <h3>已同步 0 個聯絡人<a style="float: right">全部刪除</a></h3>
+            <p>上傳到 Instagram 的聯絡人資料會顯示在這裡。</p><hr/>
+            <input type="submit" value="全部刪除" style="width: 100px">
+
+        </div>
+    </div>
+{% endblock %}

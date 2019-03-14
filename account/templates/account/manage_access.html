@@ -1,0 +1,19 @@
+{% extends "base2.html" %}
+{% load thumbnail %}
+
+{% block title %}授權的應用程式‧Mate{% endblock %}
+{% block content %}
+    <div class="setting-form" style="height: 600px">
+        <div class="setting-title">
+           <li ><a href="/accounts/edit/" ><button>編輯個人檔案</button></a></li>
+            <li><a href="/accounts/password_change/"><button>更改密碼</button></a></li>
+            <li style="border-left: 2px solid white;"><a href="/accounts/manage_access/"><button style="color: white">已授權的應用程式</button></a></li>
+            <li><a href="/emails/settings/"><button>電子郵件和簡訊</button></a></li>
+            <li ><a href="/accounts/contact_history/"><button >管理聯絡人</button></a></li>
+            <li><a href="/accounts/privacy_and_security/"><button>隱私設定與帳號安全</button></a></li>
+        </div>
+        <div class="setting-article">
+                <p>你尚未授權任何應用程式存取你的 Mate 帳號。</p>
+        </div>
+    </div>
+{% endblock %}

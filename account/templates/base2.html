@@ -1,34 +1,68 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
+    <style>
+        .sticky {
+          position: fixed;
+          top: -10px;
+          width: 97%;
+          padding: 20px 20px;
+        }
+        #myDIV {
+            position: fixed;
+            top: 65px;
+            left: 800px;
+            width: 400px;
+            height: 300px;
+            display: none;
+            background-color: #bababa;
+            font-size: 18px;
+            border-radius: 2%;
+        }
+        @media  (max-width: 625px){
+             #mySearch { display: none;}
+        }
+    </style>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0; user-scalable=0;">
         <title>{% block title %}{% endblock %}</title>
         <link href="{% static "css/base2.css" %}" rel="stylesheet">
+        <link rel="icon" type="image/png" href="../../media/kar.png" />
     </head>
-    <body>
+    <body onload="init()">
         <div id="header">
-            <a href="/"><span class="logo">Mate</span></a>
-                <span class="user">
+            <div class="header-image-and-logo">
+                <a href="/"><img src="../../media/kar.png" class="image-logo"></a>
+                <a href="/"><span class="logo">Mate</span></a>
+            </div>
+                <input  type="search" id="mySearch" placeholder="搜尋" autocomplete="off">
                     {% if request.user.is_authenticated %}
-                        <a href="/accounts/users/">探索</a>
-                        <a href="/">活動</a>
-                        <a href="/{{ request.user }}/">個人</a>
-                        <a href="/accounts/logout/">登出</a>
+                        <div class="user2" style="">
+                            <a href="/explore/"><img src="../../media/explore.png" class="header-image"></a>
+                            <span style="cursor: pointer" onclick="myFunction2()"><a type="button" ><img src="../../media/heart.png" class="header-image"></a></span>
+                            <a href="/{{ request.user }}/"><img src="../../media/personal.png" class="header-image"></a>
+                        </div>
+                        <span id="myDIV">
+                            <a>貼文活動紀錄<br/>
+                                有人對你的貼文按讚或留言時，就會顯示在這裡。</a>
+                        </span>
+
                     {% else %}
-                        <a href="/accounts/login/">登入</a>
-                        <a href="/accounts/register/">註冊</a>
+                        <span class="user3">
+                            <a href="/accounts/login/"><button class="button-login-follow">登入</button></a>
+                            <a href="/accounts/register/" class="button-register">註冊</a>
+                        </span>
                     {% endif %}
-                </span>
+
         </div>
         {% if messages %}
          <ul class="messages">
            {% for message in messages %}
              <li class="{{ message.tags }}">
             {{ message|safe }}
-                <a href="#" class="close"> </a>
+                <a href="#" class="close"></a>
              </li>
            {% endfor %}
          </ul>
@@ -63,6 +97,46 @@
                 {% block domready %}
                 {% endblock %}
             });
+
+            window.onscroll = function() {myFunction()};
+
+            var header = document.getElementById("header");
+            var sticky = header.offsetTop;
+
+            function myFunction() {
+              if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                  $('.logo').hide();
+                  $('.header-image').show()
+              } else {
+                header.classList.remove("sticky");
+                $('.logo').show();
+              }
+            }
+
+            function myFunction2() {
+                var x = document.getElementById("myDIV");
+                if (x.style.display === "block") {
+                    x.style.display = "none"
+                } else   {
+                    x.style.display = "block"
+                }
+            }
+
+
+            function init() {
+                var mySearch = document.getElementById("mySearch");
+                mySearch.style.textAlign = "center";
+                var searchfocus = function () {
+                    this.style.textAlign = "left"
+                };
+                mySearch.addEventListener("focus", searchfocus);
+
+                var searchblur = function () {
+                    this.style.textAlign = "center"
+                };
+                mySearch.addEventListener("blur", searchblur);
+            }
         </script>
 
     </body>

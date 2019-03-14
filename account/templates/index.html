@@ -6,25 +6,79 @@
 {% block content %}
     <div class="container">
         <div class="sidebar_left">
-        {% if actions %}
-            {% for action in actions %}
-                {% include "actions/action/detail.html" %}
-            {% endfor %}
-        {% else %}
-            <p>目前沒有動態</p>
-        {% endif %}
+            <div id="action-list">
+                {% for action in actions %}
+                    {% if action.user in request.user.following.all %}
+                        {% include "actions/action/detail.html" %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
         <div class="sidebar_right">
-            {% thumbnail request.user.profile.photo "60x60" crop="20%" as im %}
-                <a href="/{{ request.user }}"><img src="{{ im.url }}" id="index-request-user"></a>
-            {% endthumbnail %}
-                <a href="/{{ request.user }}" id="index-request-username">{{ request.user }}</a>
-                <br/>
-                <br/>
+
+                <a href="/{{ request.user }}"><img src="{{ request.user.profile.photo.url }}" class="index-request-user"></a>
+
+                <p><a href="/{{ request.user }}" id="index-request-username">{{ request.user }}</a></p>
+
             <div class="limit">
-                <a>限時動態</a><a >全部觀看</a>
+                <a>限時動態</a><a style="float: right">全部觀看</a>
             </div>
+            <div class="limit2">
+                <a>推薦用戶</a><a style="float: right">查看全部</a>
+            </div>
+            <a>關於我們‧支援‧新聞稿‧API‧工作機會‧隱私‧<br/>使用條款‧目錄‧個人檔案‧主題標籤‧語言</a>
         </div>
     </div>
+{% endblock %}
+
+{% block domready %}
+    var page = 1;
+    var empty_page = false;
+    var block_request = false;
+
+    $(window).scroll(function() {
+        var margin = $(document).height() - $(window).height() - 200;
+        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+		    block_request = true;
+		    page += 1;
+		    $.get('?page=' + page, function(data) {
+		        if(data == '')
+		        {
+		            empty_page = true;
+		        }
+		        else {
+                    block_request = false;
+                    $('#action-list').append(data);
+    	        }
+            });
+    	}
+    });
+
+
+    $('a.like').click(function(e){
+        e.preventDefault();
+        $.post('{% url "images:like" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('a.like').data('action');
+
+                    // toggle data-action
+                    $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                    // toggle link text
+                    $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+
+                    // update total likes
+                    var previous_likes = parseInt($('span.count .total').text());
+                    $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+                }
+        });
+
+    });
+
 {% endblock %}

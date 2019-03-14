@@ -6,12 +6,7 @@
         <link href="{% static "css/base2.css" %}" rel="stylesheet">
     </head>
     <body>
-        <div id="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </body>
-    {% if messages %}
+        {% if messages %}
          <ul class="messages">
            {% for message in messages %}
              <li class="{{ message.tags }}">
@@ -21,5 +16,17 @@
            {% endfor %}
          </ul>
     {% endif %}
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    <script>
+        $(document).ready(function(){
+                {% block domready %}
+                {% endblock %}
+            });
+    </script>
+    </body>
+
 </html>
 

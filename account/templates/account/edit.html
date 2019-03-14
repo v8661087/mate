@@ -1,32 +1,38 @@
 {% extends "base2.html" %}
-{% load thumbnail %}
 
-{% block title %}編輯個人檔案{% endblock %}
+
+{% block title %}編輯個人檔案‧Mate{% endblock %}
 {% block content %}
-    <div class="setting-form">
+    <div class="setting-form" style="height: 800px">
         <div class="setting-title">
-            <ul>
-            <li><a href="/accounts/edit/">編輯個人檔案</a></li>
-            <li><a href="/accounts/password_change/">更改密碼</a></li>
-            <li><a href="/accounts/edit/">已授權的應用程式</a></li>
-            <li><a href="/accounts/edit/">電子郵件和簡訊</a></li>
-            <li><a href="/accounts/edit/">管理聯絡人</a></li>
-            <li><a href="/accounts/edit/">隱私設定與帳號安全</a></li>
-            </ul>
+
+            <li style="border-left: 2px solid white"><a href="/accounts/edit/"><button style="color: white">編輯個人檔案</button></a></li>
+            <li><a href="/accounts/password_change/"><button>更改密碼</button></a></li>
+            <li><a href="/accounts/manage_access/"><button>已授權的應用程式</button></a></li>
+            <li><a href="/emails/settings/"><button>電子郵件和簡訊</button></a></li>
+            <li><a href="/accounts/contact_history/"><button>管理聯絡人</button></a></li>
+            <li><a href="/accounts/privacy_and_security/"><button>隱私設定與帳號安全</button></a></li>
+
         </div>
         <div class="setting-article">
-            <article>
-            <form action="" method="post" enctype="multipart/form-data" id="form1">
-                {% thumbnail user.profile.photo "50x50" as im %}
-                    <a href="#ex1" rel="modal:open"><img src="{{ im.url }}" class="userdetail-profile-photo"></a>
-                {% endthumbnail %}
+                <div class="setting-photo-user">
+                {% if user.profile.photo == 'users/default.jpg'  %}
+                            <img src="{{ user.profile.photo.url }}" onclick="photo()" style="cursor: pointer" class="useredit-photo" title="更換大頭貼照">
+                            <a>{{ user }}<br/>
+                            <a onclick="photo()" style="color: rgb(0,178,255);cursor: pointer">變更大頭貼照</a>
+                            </a><br/>
+                {% else %}
+
+                    <a href="#ex1" rel="modal:open"><img src="{{ user.profile.photo.url }}" class="useredit-photo"></a>
                 <!-- Link to open the modal -->
 
-                    <p>{{ user }}<br/>
-                        <a href="#ex1" rel="modal:open" style="color: rgb(15,238,148)">變更大頭貼照</a>
-                    </p>
+                    <a>{{ user }}<br/>
+                        <a href="#ex1" rel="modal:open" style="color: rgb(0,178,255)">變更大頭貼照</a>
+                    </a><br/>
+                 {% endif %}
+                </div>
                 <!-- Modal HTML embedded directly into document -->
-            <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
+
                     <script>
                        function photo() {
                            $("#id_photo").click();
@@ -34,18 +40,34 @@
                         function submit(){
                            $("#form1").submit()
                         }
+
+                        function default_image() {
+                            $("#photo-clear_id").click()
+                        }
                   </script>
                 <div id="ex1" class="modal">
                         <h3>變更大頭貼照</h3>
                         <button type="button" onclick = "photo();">上傳相片</button>
-                        <button onclick="location.href=''" style="color: #ff4060">移除目前的大頭貼照</button>
-                        <button onclick="location.href=''">取消</button>
+                        <button onclick="default_image()" style="color: #ff4060">移除目前的大頭貼照</button>
+                        <a href="#" rel="modal:close"><button>取消</button></a>
                     </div>
-                {{ user_form.as_p }}
 
-                {% csrf_token %}
-                <p><input type="submit" value="提交"></p>
-            </form>
+            <article>
+                <form action="" method="post" enctype="multipart/form-data" id="form1">
+                    <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
+                    <input type="checkbox" name="photo-clear" id="photo-clear_id"  style="display: none" onchange="submit()" >
+                    {{ otherprofile_form.full_name.label }}：{{ otherprofile_form.full_name }}
+                    {{ user_form.username.label }}：{{ user_form.username }}
+                    {{ otherprofile_form.website.label }}：{{ otherprofile_form.website }}
+                    {{ otherprofile_form.personal_profile.label }}：{{ otherprofile_form.personal_profile }}
+                    <p>私人資料</p>
+                    {{ user_form.email.label }}：{{ user_form.email }}
+                    {{ otherprofile_form.phone_number.label }}：{{ otherprofile_form.phone_number }}
+                    {{ otherprofile_form.gender.label }}<br/>
+                    {{ otherprofile_form.gender }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="提交" class="edit-submit" style="width: 70px"></p>
+                </form>
             </article>
         </div>
     </div>

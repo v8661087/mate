@@ -1,0 +1,52 @@
+{% extends 'base3.html' %}
+
+
+{% block title %}{% endblock %}
+{% block content %}
+    <p style="margin: auto;width: 600px;">建議</p>
+    <div style="margin: auto;width: 600px;background-color: #171729">
+
+    {% for user in users %}
+        {% if user not in request.user.following.all %}
+        {% if user != request.user %}
+                            <li style="list-style-type: none">
+                                <div style="display: flex;margin: 10px">
+                                    <div>
+                                         <a href="/{{ user }}/" style="">
+                                             <img src="{{ user.profile.photo.url }}" class="follow-image">
+                                         </a>
+                                    </div>
+                                    <div style="width: 100%;max-width: 500px;">
+                                        {% if user.profile.full_name%}
+                                            <div style="display: flex;">
+                                                <a href="/{{ user }}/" style="">{{ user }}</a>
+                                            </div>
+
+                                            <div style="display: flex;color: #424242">
+                                                {{ user.profile.full_name }}
+                                            </div>
+                                        {% else %}
+                                            <div style="padding-top:11px">
+                                                <a href="/{{ user }}/" style="">{{ user }}</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                {% if user != request.user %}
+                                    <div style="width:100px; margin-top: 10px">
+                                        <a href="#" style="" data-id="{{ user.id }}" data-action="{% if user in request.user.following.all %} 已{% endif %}追蹤" class="follow2 button">
+                                            {% if user not in request.user.following.all %}
+                                            追蹤
+                                        {% else %}
+                                            已追蹤
+                                        {% endif %}
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                </div>
+                            </li>
+                            {% endif %}
+        {% endif %}
+                        {% endfor %}
+</div>
+{% endblock %}

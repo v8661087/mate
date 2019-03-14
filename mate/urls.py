@@ -22,11 +22,18 @@ from images.views import image_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('explore/', image_list, name='image_list'),
+    path('explore/people/suggested/', views.explore_people_suggested, name='people_suggested'),
     path('accounts/', include('account.urls')),
     path('', views.index, name='index'),
     path('<str:username>/', views.user_detail, name='user_detail'),
+    path('<str:username>/channel', views.user_channel, name='user_channel'),
+    path('<str:username>/saved', views.user_saved, name='user_saved'),
+    path('<str:username>/tagged', views.user_tagged, name='user_tagged'),
     path('images/', include('images.urls', namespace='images')),
     path('user/follow/', views.user_follow, name='user_follow'),
+    path('emails/settings/', views.emails_settings),
+
 ]
 
 
