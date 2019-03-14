@@ -1,4 +1,4 @@
-    {% if actions %}
+
     <div class="actions">
             <div>
                 <a href="{{ action.user.get_absolute_url }}">
@@ -59,9 +59,7 @@
             {% endwith %}
         </div>
 	</div>
-{% else %}
-    目前沒有動態
-{% endif %}
+
 <script>
     function dosubmit(){
      //获取表单提交按钮

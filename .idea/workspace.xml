@@ -5,66 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcdfdc70-27f3-4c68-8980-f50e4dfb0395" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/account/templates/account/contact_history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/account/manage_access.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/account/privacy_and_security.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/account/user/channel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/account/user/saved.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/account/user/tagged.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/emails_settings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/explore.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/templates/explore_people_suggested.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lib/site-packages/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/site-packages/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/static/css/base2.css" beforeDir="false" afterPath="$PROJECT_DIR$/account/static/css/base2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/static/css/jquery.modal.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/account/static/css/jquery.modal.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/user/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base2.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/base2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base3.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/base3.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/mate.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/mate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/registration/password_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/registration/password_change.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/actions/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions/templates/actions/action/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/actions/templates/actions/action/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/images/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/images/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/images/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/templates/images/image/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/images/templates/images/image/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/templates/images/image/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/images/templates/images/image/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/templates/images/image/list_ajax.html" beforeDir="false" afterPath="$PROJECT_DIR$/images/templates/images/image/list_ajax.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/images/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/images/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mate/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mate/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/1b/c5/1bc5c66eebdcba02a988678dcba2495f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/34/6e/346ed72cd45d56ab06af4b3158f3014e.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/52/47/52477673d1fd8bfb33f2d5612ce97e68.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/54/f9/54f9e56d2b0bf80e02083349f22b7256.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/64/e9/64e964e9116f31959bd5b27885670691.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/78/29/7829348929675547455948cefc208f9f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/78/a2/78a214063702767571aea658d785332a.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/91/0f/910fe6025a911377d21b0959872bfa2f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cache/92/2e/922e8ba2cb9ff05b4b45404d652310ce.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/2019/02/15/pooh_1024.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/0013a20823318ccb6c25d9fac7733ac3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/1200px-皮卡丘之歌.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/1fab9d9b86c9071e3f10c14b7869e3ec338f1429.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/1fab9d9b86c9071e3f10c14b7869e3ec338f1429_UGiLaD4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/20160825-248152_bm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/13/20160825-248152_bm_V3Qprcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/users/2019/02/14/a098e648dc911b1dd19e151da74d1c95.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/pip-selfcheck.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -160,14 +102,14 @@
         <counts>
           <entry key="Django Console" value="12" />
           <entry key="css" value="6914" />
-          <entry key="html" value="26659" />
+          <entry key="html" value="26689" />
           <entry key="py" value="11827" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="6914" />
-          <entry key="HTML" value="26659" />
+          <entry key="HTML" value="26689" />
           <entry key="Python" value="11839" />
         </counts>
       </usages-collector>
@@ -181,8 +123,9 @@
           <entry key="js" value="3" />
           <entry key="map" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="325" />
+          <entry key="py" value="327" />
           <entry key="sql" value="1" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -192,7 +135,8 @@
           <entry key="HTML" value="472" />
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="3" />
-          <entry key="Python" value="325" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="327" />
           <entry key="Scratch" value="1" />
           <entry key="SourceMap" value="1" />
         </counts>
@@ -201,15 +145,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/static/css/base2.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="137" column="4" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/images/templates/images/image/detail.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -224,20 +159,6 @@
                 <element signature="e#9222#9247#0#HTML" expanded="true" />
                 <element signature="e#9296#9334#0#HTML" expanded="true" />
                 <element signature="e#9421#9445#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/templates/account/edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
-              <caret line="68" column="90" selection-start-line="68" selection-start-column="90" selection-end-line="68" selection-end-column="90" />
-              <folding>
-                <element signature="e#142#163#0#HTML" expanded="true" />
-                <element signature="e#1158#1204#0#HTML" expanded="true" />
-                <element signature="e#1546#1561#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -261,39 +182,59 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/account/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+            <state relative-caret-position="264">
+              <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="696">
-              <caret line="62" column="10" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mate/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="936">
+            <state relative-caret-position="216">
               <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mate/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="-46">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#220#229#0" expanded="true" />
+              </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mate/production_settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-72" />
           </provider>
         </entry>
       </file>
@@ -386,7 +327,6 @@
         <option value="$PROJECT_DIR$/account/urls.py" />
         <option value="$PROJECT_DIR$/account/templates/base2.html" />
         <option value="$PROJECT_DIR$/account/templates/base3.html" />
-        <option value="$PROJECT_DIR$/account/templates/index.html" />
         <option value="$PROJECT_DIR$/account/views.py" />
         <option value="$PROJECT_DIR$/account/templates/account/user/channel.html" />
         <option value="$PROJECT_DIR$/account/templates/account/user/saved.html" />
@@ -398,6 +338,7 @@
         <option value="$PROJECT_DIR$/account/static/css/base2.css" />
         <option value="$PROJECT_DIR$/images/templates/images/image/detail.html" />
         <option value="$PROJECT_DIR$/actions/templates/actions/action/detail.html" />
+        <option value="$PROJECT_DIR$/account/templates/index.html" />
       </list>
     </option>
   </component>
@@ -622,8 +563,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="696" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="696" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19093852" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -639,7 +579,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3291815" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50161815" side_tool="true" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49838188" visible="true" weight="0.1975089" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49838188" visible="true" weight="0.3950178" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3291815" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -680,19 +620,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/images/templates/images/image/create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1784">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actions/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actions/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/actions/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-120">
@@ -1010,31 +937,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/mate/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        <state relative-caret-position="-46">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#220#229#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
+    <entry file="file://$PROJECT_DIR$/mate/production_settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="62" column="10" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
+        <state relative-caret-position="48">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mate/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
+        <state relative-caret-position="216">
           <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mate/wsgi.py">
+    <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="264">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
         </state>
       </provider>
     </entry>
