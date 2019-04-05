@@ -67,6 +67,7 @@ def user_detail(request, username):
     images = Image.objects.all()
     paginator = Paginator(images, 15)
     page = request.GET.get('page')
+    users = User.objects.filter(is_active=True)
     try:
         images = paginator.page(page)
     except PageNotAnInteger:
@@ -94,7 +95,7 @@ def user_detail(request, username):
             if request.user.profile.photo:
                 request.user.profile.photo = request.user.profile.photo
             else:
-                Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+                Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
             messages.success(request, '已變更大頭貼照')
         else:
             messages.error(request, 'Error updating your profile')
@@ -105,7 +106,8 @@ def user_detail(request, username):
                                 is_active=True)
         profile_form = ProfileEditForm()
     return render(request, 'account/user/detail.html', {'user': user,
-                                            'profile_form': profile_form})
+                                            'profile_form': profile_form,
+                                                        'users': users})
 
 @login_required
 def user_list(request):
@@ -118,6 +120,7 @@ def index(request):
     actions = Action.objects.all()
     paginator = Paginator(actions, 15)
     page = request.GET.get('page')
+
 
     try:
         actions = paginator.page(page)
@@ -137,7 +140,7 @@ def index(request):
     if request.user.is_authenticated:
         actions = Action.objects.all()
         following_ids = request.user.following.values_list('id', flat=True)
-
+        users = User.objects.filter(is_active=True)
     #    post = get_object_or_404(Image, id=, slug=)
      #   comments = post.comments
      #   new_comment = None
@@ -149,7 +152,8 @@ def index(request):
 
         actions = actions[:]
         return render(request, 'index.html', {'actions': actions,
-                                              'following_ids': following_ids})
+                                              'following_ids': following_ids,
+                                              'users':users})
     elif request.method == 'POST':
         user_form = UserRegisterForm(request.POST)
         fullname_form = FullnameForm(request.POST)
@@ -166,13 +170,12 @@ def index(request):
                                          'fullname_form': fullname_form})
 
 @login_required
-
 def edit(request):
 
     if request.user.profile.photo:
         request.user.profile.photo = request.user.profile.photo
     else:
-        Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+        Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
 
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
@@ -189,7 +192,7 @@ def edit(request):
             if request.user.profile.photo:
                 request.user.profile.photo = request.user.profile.photo
             else:
-                Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+                Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
             messages.success(request, 'Profile updated successfully')
         else:
             messages.error(request, 'Error updating your profile')
@@ -241,7 +244,7 @@ def password_change(request):
 @login_required
 def password_change_done(request):
     return render_to_response('registration/password_change_done.html')
-
+@login_required
 def user_channel(request, username):
     if request.method == 'POST':
         user = get_object_or_404(User,
@@ -255,7 +258,7 @@ def user_channel(request, username):
             if request.user.profile.photo:
                 request.user.profile.photo = request.user.profile.photo
             else:
-                Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+                Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
             messages.success(request, '已變更大頭貼照')
         else:
             messages.error(request, 'Error updating your profile')
@@ -267,7 +270,7 @@ def user_channel(request, username):
         profile_form = ProfileEditForm()
     return render(request,'account/user/channel.html', {'user': user,
                                             'profile_form': profile_form})
-
+@login_required
 def user_saved(request, username):
     if request.method == 'POST':
         user = get_object_or_404(User,
@@ -281,7 +284,7 @@ def user_saved(request, username):
             if request.user.profile.photo:
                 request.user.profile.photo = request.user.profile.photo
             else:
-                Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+                Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
             messages.success(request, '已變更大頭貼照')
         else:
             messages.error(request, 'Error updating your profile')
@@ -293,7 +296,7 @@ def user_saved(request, username):
         profile_form = ProfileEditForm()
     return render(request,'account/user/saved.html', {'user': user,
                                             'profile_form': profile_form})
-
+@login_required
 def user_tagged(request, username):
     if request.method == 'POST':
         user = get_object_or_404(User,
@@ -307,7 +310,7 @@ def user_tagged(request, username):
             if request.user.profile.photo:
                 request.user.profile.photo = request.user.profile.photo
             else:
-                Profile.objects.filter(user=request.user).update(photo='users/default.jpg')
+                Profile.objects.filter(user=request.user).update(photo='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
             messages.success(request, '已變更大頭貼照')
         else:
             messages.error(request, 'Error updating your profile')
@@ -319,19 +322,24 @@ def user_tagged(request, username):
         profile_form = ProfileEditForm()
     return render(request, 'account/user/tagged.html', {'user': user,
                                             'profile_form': profile_form})
-
+@login_required
 def manage_access(request):
     return render(request, 'account/manage_access.html')
 
+@login_required
 def emails_settings(request):
     return render(request,'emails_settings.html')
 
+@login_required
 def contact_history(request):
     return render(request,'account/contact_history.html')
 
+@login_required
 def privacy_and_security(request):
     return render(request,'account/privacy_and_security.html')
 
+@login_required
 def explore_people_suggested(request):
     users = User.objects.filter(is_active=True)
     return render(request, 'explore_people_suggested.html', {'users': users})
+

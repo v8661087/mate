@@ -2,61 +2,160 @@
     <div class="actions">
             <div>
                 <a href="{{ action.user.get_absolute_url }}">
-                    <img src="{{ action.user.profile.photo.url }}" class="item-img">
+                    <img src="{{ action.user.profile.photo }}" class="item-img">
                     <p><a href="{{ action.user.get_absolute_url }}" title="{{ action.user }}" class="action-user">{{ action.user }}</a>
                 </p></a>
             </div>
 
-			{% with target=action.target %}
-                    <img src="{{ target.image.url }}" class="action-image">
+
+                    <img src="{{ action.target.url }}" class="action-image">
              <div style="margin: 0px 20px;">
-                <img src="../../../../media/heart.png" >
-                <img src="../../../../media/message.png">
-                <img src="../../../../media/share.png">
-                <img src="../../../../media/saved.png" style="float: right">
-                <br/>
-                {% with total_likes=target.users_like.count users_like=target.users_like.all %}
+                <section style="margin: 5px 0px">
+                {% if request.user in action.target.users_like.all  %}
+                    {% if action.target.users_like.all.count >= 2 %}
+                        <button class="image-button" onclick="like_or_unlike{{ action.target.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png" id="imgClickAndChange{{ action.target.id }}" style="cursor: pointer"></button>
+                    {% else %}
+                        <button class="image-button" onclick="like_or_unlike{{ action.target.id }}();zerolike{{ action.target.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png" id="imgClickAndChange{{ action.target.id }}" style="cursor: pointer"></button>
+                    {% endif %}
+                {% else %}
+                    {% if action.target.users_like.all.count >= 1 %}
+                        <button class="image-button" onclick="like_or_unlike{{ action.target.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png" id="imgClickAndChange{{ action.target.id }}" style="cursor: pointer"></button>
+                    {% else %}
+                        <button class="image-button" onclick="like_or_unlike{{ action.target.id }}();firstlike{{ action.target.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png" id="imgClickAndChange{{ action.target.id }}" style="cursor: pointer"></button>
+                    {% endif %}
+                {% endif %}
+
+                    <button class="image-button" onclick="comment_focus{{ action.target.id }}()"><img src="../../../../media/message.png" style="cursor: pointer"></button>
+                    {% if action.user != request.user %}
+                        <button class="image-button"><a href="#share" rel="modal:open"><img src="../../../../media/share.png"></a></button>
+                    {% endif %}
+                {% if action.target in request.user.images_saved.all %}
+                   <button  class="image-button" style="float: right" onclick="saved_or_unsaved{{ action.target.id }}()"><a style="float: right;cursor: pointer"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved2.png" id="saved_image{{ action.target.id }}"></a></button>
+                {% else %}
+                    <button  class="image-button" style="float: right" onclick="saved_or_unsaved{{ action.target.id }}()"><a style="float: right;cursor: pointer"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved.png" id="saved_image{{ action.target.id }}"></a></button>
+                {% endif %}
+                <a href="#" data-id="{{ action.target.id }}" data-action="{% if action.target in user.images_saved.all %}un{% endif %}saved" class="saved button" id="saved{{ action.target.id }}" style="">
+                        {% if action.target not in user.images_saved.all %}
+                            Saved
+                        {% else %}
+                            Unsaved
+                        {% endif %}
+                    </a>
+        <div id="share" class="modal">
+            <h3>分享</h3>
+            <h4>分享到Facebook</h4>
+            <h4>分享到Messanger</h4>
+            <h4>分享到Twitter</h4>
+            <h4>透過電子郵件分享</h4>
+            <h4>複製連結</h4>
+            <a href="#" rel="modal:close">取消</a>
+
+        </div>
+
+        </section>
+
+
                     <div class="image-info2">
-                            <div>
+
                                 <span class="count">
-                                    <span class="total">{{ total_likes }}</span>
-                                    個讚
+                                    {% if action.target.users_like.all.count == 0 %}
+                                        <span id="first{{ action.target.id }}">成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人</span>
+                                    {% else %}
+                                        <span id="first{{ action.target.id }}"><a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">{{ action.target.users_like.count }}</span>個讚</a></span>
+                                    {% endif %}
                                 </span>
-                                <a href="#" data-id="{{ target.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button" style="display: none">
-                                    {% if request.user not in users_like %}
+                                <a href="#" data-id="{{ action.target.id }}" data-action="{% if request.user in action.target.users_like.all %}un{% endif %}like" class="like button" style="" id="images_{{ action.target.id }}">{% if request.user not in action.target.users_like.all %}Like{% else %}Unlike{% endif %}</a>
+
+                                <div id="ex{{ action.target.id }}" class="modal" style="height: 500px;">
+                                    <div><p>說讚的用戶</p></div><hr/>
+                                        {% for user in action.target.users_like.all %}
+
+                                                <div style="display: flex;margin: 5px 10px">
+                                                    <div style="flex: none"><a href="/{{ user }}/"> <img src="{{ user.profile.photo }}" style="width: 44px;border-radius: 50%"></a></div>
+                                                    <div style="flex: none;margin: 10px 0 0 10px;width:100%;max-width: 330px;text-align: left"><a href="/{{ user }}/">{{ user }}</a></div>
+                                                    {% if user != request.user %}
+                                                        <div style="flex: none">
+                                                            <a href="#"  data-id="{{ user.id }}" data-action="{% if user in request.user.following.all %}已{% endif %}追蹤" class="follow button" id="user{{ user }}">
+                                                                {% if user not in request.user.following.all %}
+                                                                    追蹤
+                                                                {% else %}
+                                                                    已追蹤
+                                                                {% endif %}
+                                                            </a>
+                                                       </div>
+                                                    {% endif %}
+                                                </div>
+
+                                        {% endfor %}
+                                </div>
+
+                    </div>
+
+                {% if action.target.description %}
+                    <div>
+                        <a href="{{ action.user.get_absolute_url }}" title="{{ action.user }}">{{ action.user }}</a>
+                        <a>{{ action.target.description|linebreaksbr }}</a>
+                    </div>
+
+                {% endif %}
+                    {% if action.target.comments.all.count > 4 and action.target.comments.all.count < 40 %}
+                                <button id="load_more_comments{{ action.target }}" style="padding: 6px 0;border: none;font-size: 18px;cursor: pointer;outline: none">查看全部<span style="padding: 0 5px">{{ action.target.comments.all.count }}</span>則留言</button>
+                                <style>
+                                    #load_more_comments{{ action.target }} {background-color: #17181c;color: #cbcbcb}
+                                    #load_more_comments{{ action.target }}:active {color: #6d6d6d}
+                                </style>
+                        {% elif action.target.comments.all.count >= 40 %}
+                        <button id="load_more_comments{{ action.target }}" style="padding: 6px 0;border: none;font-size: 18px;cursor: pointer;outline: none">載入全部留言</button>
+                    {% endif %}
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+                        <script>
+                            $(function () {
+                            $(".{{ action.target }} li").slice(-4).show();
+                            $("#load_more_comments{{ action.target }}").on('click', function (e) {
+                                e.preventDefault();
+                                $(".{{ action.target }} li:hidden").slice(-4).show();
+                                if ($(".{{ action.target }} li:hidden").length == 0) {
+                                    $("#load_more_comments{{ action.target }}").hide();
+                                    }
+                                });
+                            });
+                        </script>
+                {% for comment in action.target.comments.all  %}
+                    <div class="{{ action.target }}">
+                    <li style="list-style-type: none;margin: 7px 0px;display: none">
+                    <div style="display: flex">
+                            <div style="max-width: 690px;width: 100%;flex: none">
+                                <a href="/{{ comment.user }}/" onload="comment()" style="margin: 0px 5px 0px 0px">{{ comment.user }}</a>{{ comment.body }}
+                                <a href="#" data-id="{{ comment.id }}" data-action="{% if request.user in comment.liked.all %}un{% endif %}like" class="comment_like button" id="comment_like_button_{{ comment.id }}" style="">
+                                    {% if request.user not in comment.liked.all %}
                                         Like
                                     {% else %}
                                         Unlike
                                     {% endif %}
                                 </a>
                             </div>
+                            {% if request.user in comment.liked.all %}
+                                <button class="image-button" onclick="comment_like_or_unlike{{ comment.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png" id="comment_{{ comment.id }}" style="cursor: pointer;width: 15px;padding-top: 3px"></button>
+                            {% else %}
+                                <button class="image-button" onclick="comment_like_or_unlike{{ comment.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png" id="comment_{{ comment.id }}" style="cursor: pointer;width: 15px"></button>
+                            {% endif %}
+                        </div>
+                    </li>
+                </div>
 
-                    </div>
-                {% endwith %}
-
-                <a href="{{ action.user.get_absolute_url }}" title="{{ action.user }}">{{ action.user }}</a>
-                <a>{{ target.description|linebreaks }}</a>
-                id:{{ action.target.id }}
-                slug:{{ action.target.slug }}
-                title:{{ action.target.title }}
-
-                {% for comment in comments %}
-                    <p class="info"></p>
-                    <li style="list-style-type: none"><a href="/{{ comment.user }}/" style="margin: 0px 5px 0px 0px">{{ comment.user }}</a>{{ comment.body }}
-                    <img src="../../../../media/heart.png" style="float: right"></li>
                 {% empty %}
                 {% endfor %}
 
-                <br/>
+            <div style="border-bottom:1px solid #adadad ">
                 <a href="{{ action.target.get_absolute_url }}" style="font-size: 14px;color: #cacaca">{{ action.when_published }}</a>
-                <hr/>
+            </div>
 			    <section style="height: 50px;">
                     <form action="." method="post" onsubmit="return dosubmit()" id="comment-form">
-                        <input type="text" name="body" placeholder="留言‧‧‧‧‧"  id="id_body" autocomplete="off">
+                        <input type="text" name="body" placeholder="留言‧‧‧‧‧"  id="id_body" class="id_body{{ action.target.id }}" autocomplete="off">
                         {% csrf_token %}
                     </form>
                 </section>
-            {% endwith %}
+
         </div>
 	</div>
 
@@ -69,4 +168,75 @@
      //返回true让表单可以正常提交
      return true;
     }
+
+    function like_or_unlike{{ action.target.id }}() {
+         $('#images_{{ action.target.id }}').click();
+         var img = document.getElementById("imgClickAndChange{{ action.target.id }}");
+         if (img.src === "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png"){
+            img.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png"
+         }
+         else {
+             img.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png"
+         }
+
+     }
+
+        function comment_focus{{ action.target.id }}() {
+            $('.id_body{{ action.target.id }}').focus();
+     }
+
+     function saved_or_unsaved{{ action.target.id }}() {
+            $('#saved{{ action.target.id }}').click();
+        var img2 = document.getElementById("saved_image{{ action.target.id }}");
+        if (img2.src === "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved2.png"){
+            img2.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved.png"
+        }else {
+            img2.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved2.png"
+        }
+
+     }
+
+           function firstlike{{ action.target.id }}() {
+                    if( document.getElementById('first{{ action.target.id }}').innerHTML === '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'){
+                        document.getElementById('first{{ action.target.id }}').innerHTML = '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">{{ action.target.users_like.count }}</span>個讚</a>'
+                    }
+                    else {
+                        document.getElementById('first{{ action.target.id }}').innerHTML = '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }
+                }
+            function zerolike{{ action.target.id }}() {
+                    if (document.getElementById('first{{ action.target.id }}').innerHTML === '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">1</span>個讚</a>' && document.getElementById('images_{{ action.target.id }}').innerText === 'UNLIKE'){
+                        document.getElementById('first{{ action.target.id }}').innerHTML = '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike2{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }else {
+                        document.getElementById('first{{ action.target.id }}').innerHTML = '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">0</span>個讚</a>'
+                    }
+                }
+
+           function firstlike2{{ action.target.id }}() {
+                    if( document.getElementById('first{{ action.target.id }}').innerHTML === '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike2{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'){
+
+
+                    document.getElementById('first{{ action.target.id }}').innerHTML = '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">1</span>個讚</a>'
+                    }else {
+                        document.getElementById('first{{ action.target.id }}').innerHTML = '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike2{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
+                    }
+                }
+
+
+    {% for comment in action.target.comments.all %}
+     function comment_like_or_unlike{{ comment.id }}() {
+
+            $('#comment_like_button_{{ comment.id }}').click();
+         var img = document.getElementById('comment_{{ comment.id }}');
+         if (img.src === "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png"){
+             img.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png"
+
+         }else{
+             img.src = "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png"
+         }
+
+     }
+    {% endfor %}
 </script>
+
+

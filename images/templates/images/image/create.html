@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>新貼文</h1>
-    <form action="." method="post" enctype="multipart/form-data" id="formUpload">
+    <form action="." method="post" enctype="multipart/form-data" id="formUpload" autocomplete="off">
         {{ form.as_p }}
         {% csrf_token %}
         <input type="submit" value="分享">
@@ -32,44 +32,10 @@
         }
       });
 
-      /* SCRIPTS TO HANDLE THE CROPPER BOX */
-      var $image = $("#image");
-      var cropBoxData;
-      var canvasData;
-      $("#modalCrop").on("shown.bs.modal", function () {
-        $image.cropper({
-          viewMode: 1,
-          aspectRatio: 1,
-          minCropBoxWidth: 600,
-          minCropBoxHeight: 600,
-          ready: function () {
-            $image.cropper("setCanvasData", canvasData);
-            $image.cropper("setCropBoxData", cropBoxData);
-          }
-        });
-      }).on("hidden.bs.modal", function () {
-        cropBoxData = $image.cropper("getCropBoxData");
-        canvasData = $image.cropper("getCanvasData");
-        $image.cropper("destroy");
-      });
 
-      $(".js-zoom-in").click(function () {
-        $image.cropper("zoom", 0.1);
-      });
 
-      $(".js-zoom-out").click(function () {
-        $image.cropper("zoom", -0.1);
-      });
 
-      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-      $(".js-crop-and-upload").click(function () {
-        var cropData = $image.cropper("getData");
-        $("#id_x").val(cropData["x"]);
-        $("#id_y").val(cropData["y"]);
-        $("#id_height").val(cropData["height"]);
-        $("#id_width").val(cropData["width"]);
-        $("#formUpload").submit();
-      });
+
 
     });
   </script>
@@ -87,7 +53,7 @@
 
         </div>
         <div class="modal-body">
-          <img src="" id="image" style="max-width: 80%;max-height: 80%">
+          <img src="" id="image" style="max-width: 1080px;max-height: 1080px;width: 100%">
         </div>
       </div>
     </div>

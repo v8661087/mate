@@ -7,7 +7,7 @@ class ImageCreateForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('title',  'image', 'description',)
+        fields = ('title', 'description', 'url',)
 
 
 class CommentForm(forms.ModelForm):

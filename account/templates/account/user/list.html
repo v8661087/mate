@@ -15,7 +15,7 @@
                     {% if user == request.user %}
                     {% else %}
                     <div class="user">
-                     <a href="/{{ user }}/"><img src="{{ user.profile.photo.url }}"></a>
+                     <a href="/{{ user }}/"><img src="{{ user.profile.photo }}"></a>
                     <div class="info">
                      <p><a href="{{ user.get_absolute_url }}" class="title">{{ user }}</a></p>
                    </div>

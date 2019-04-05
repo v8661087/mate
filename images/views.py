@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRe
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ImageCreateForm, CommentForm
-from .models import Image
+from .models import Image, Comment
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
@@ -39,6 +39,7 @@ def image_create(request):
     return render(request, 'images/image/create.html', {'form': form})
 
 def image_detail(request, id, slug):
+    users = User.objects.filter(is_active=True)
     image = get_object_or_404(Image, id=id, slug=slug)
     post = get_object_or_404(Image, id=id, slug=slug)
     comments = post.comments.filter()
@@ -64,8 +65,8 @@ def image_detail(request, id, slug):
     else:
         comment_form = CommentForm()
     return render(request, 'images/image/detail.html',
-                  {'image': image,
-                   'post': post, 'comments': comments, 'comment_form': comment_form})
+                  {'image': image, 'post': post, 'comments': comments,
+                   'comment_form': comment_form, 'users': users})
 
 @ajax_required
 @login_required
@@ -103,6 +104,23 @@ def image_like(request):
             pass
     return JsonResponse({'status': 'ko'})
 
+@ajax_required
+@login_required
+@require_POST
+def comment_like(request):
+    comment_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if comment_id and action:
+        try:
+            comment = Comment.objects.get(id=comment_id)
+            if action == 'like':
+                comment.liked.add(request.user)
+            else:
+                comment.liked.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except:
+            pass
+    return JsonResponse({'status': 'ko'})
 
 @login_required
 def image_list(request):

@@ -3,10 +3,10 @@
 <html>
     <style>
         .sticky {
-          position: fixed;
-          top: -10px;
-          width: 97%;
-          padding: 20px 20px;
+            position: fixed;
+            top: -10px;
+            width: 97%;
+            z-index: 2;
         }
         #myDIV {
             position: fixed;
@@ -21,6 +21,8 @@
         }
         @media  (max-width: 625px){
              #mySearch { display: none;}
+            #fa-search{display: none;}
+            .autocomplete {display: none}
         }
     </style>
     <head>
@@ -29,26 +31,312 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0; user-scalable=0;">
         <title>{% block title %}{% endblock %}</title>
         <link href="{% static "css/base2.css" %}" rel="stylesheet">
-        <link rel="icon" type="image/png" href="../../media/kar.png" />
+        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/kar.png"/>
     </head>
     <body onload="init()">
-        <div id="header">
-            <div class="header-image-and-logo">
-                <a href="/"><img src="../../media/kar.png" class="image-logo"></a>
-                <a href="/"><span class="logo">Mate</span></a>
+        <div id="header" style="justify-content: center">
+            <div class="header-image-and-logo" style="width: 33%;">
+                <a href="/"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/kar.png" class="image-logo"></a>
+                <a href="/" class="logo" id="logo">Mate</a>
             </div>
-                <input  type="search" id="mySearch" placeholder="搜尋" autocomplete="off">
+            <style>
+                .autocomplete {
+                  text-align: center;
+                    max-width: 280px;
+                    flex: none;
+                    width: 100%;
+
+                }
+
+                #mySearch {
+                  border: 1px solid rgb(151, 143, 128);
+                  background-color: #17181c;
+                  padding: 10px 10px 10px 25px;
+                  font-size: 16px;
+                  color:white;
+                  margin: auto;
+                  width: 250px;
+                }
+                ::placeholder{
+                    color: white;
+                }
+
+
+                .autocomplete-items {
+                  border: 1px solid #d4d4d4;
+                  border-bottom: none;
+
+                  z-index: 99;
+                  /*position the autocomplete items to be the same width as the container:*/
+                  overflow: auto;
+                  max-height: 400px;
+                  width: 290px;
+
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .search-list {
+                  padding: 10px;
+                  cursor: pointer;
+                  background-color: #17181c;
+                  border-bottom: 1px solid #d4d4d4;
+                  color:white;
+                  text-align: left;
+                  height: 40px;
+                  font-size: 18px;
+                    display: flex;
+                }
+                .search-list-none {
+                  padding: 10px;
+                  background-color: #17181c;
+                  border-bottom: 1px solid #d4d4d4;
+                  color:white;
+
+                  height: 40px;
+                  font-size: 18px;
+                  display: flex;
+                  justify-content: center;
+                    align-items: center;
+
+                }
+
+                /*when hovering an item:*/
+                .search-list:hover {
+                  background-color: #5c5c5c;
+                }
+
+                /*when navigating through the items using the arrow keys:*/
+                .search-list-active {
+                  background-color: DodgerBlue !important;
+                  color: #ffffff;
+                }
+                .triangle {
+                  content: '';
+                  width: 0;
+                  height: 0;
+                  border-style: solid;
+                  border-width: 0 10px 10px 10px;
+                  border-color: transparent transparent #feffff transparent;
+                  margin-top: 10px;
+                  margin-left: auto;
+                  margin-right: auto;
+                }
+                         .fa-search{
+                            position: relative;
+                             left:41%;
+                             width: 13px;
+                             height: 14px;
+                             margin-right: 6px;
+                             cursor: text;
+
+                         }
+                </style>
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <!--Make sure the form has the autocomplete function switched off:-->
+              <div class="autocomplete">
+                  <span onclick="$('#mySearch').focus()" class="fa fa-search" id="fa-search"></span>
+                <input id="mySearch" type="search" placeholder="搜尋" autocomplete="off">
+
+              </div>
+
+            <script>
+            function autocomplete(inp, arr) {
+              /*the autocomplete function takes two arguments,
+              the text field element and an array of possible autocompleted values:*/
+              var currentFocus;
+              /*execute a function when someone writes in the text field:*/
+              inp.addEventListener("input", function(e) {
+                  var a, b, i,c, val = this.value;
+                  /*close any already open lists of autocompleted values*/
+                  closeAllLists();
+                  if (!val) { return false;}
+                  currentFocus = -1;
+                  /*create a DIV element that will contain the items (values):*/
+                  a = document.createElement("DIV");
+                  a.setAttribute("id", this.id + "autocomplete-list");
+                  a.setAttribute("class", "autocomplete-items");
+                  c = document.createElement("DIV");
+                  c.setAttribute("class", "triangle");
+                  /*append the DIV element as a child of the autocomplete container:*/
+                  this.parentNode.appendChild(c);
+                  this.parentNode.appendChild(a);
+                  /*for each item in the array...*/
+
+                  for (i = 0; i < arr.length; i++) {
+                    if (arr[i].toUpperCase().match(val.toUpperCase())) {
+                      /*create a DIV element for each matching element:*/
+                      b = document.createElement("A");
+                      b.setAttribute("href", "/"+ arr[i]+"/");
+                      b.setAttribute("class", "search-list");
+                      /*make the matching letters bold:*/
+
+                          {% for user in users %}
+
+                      b.innerHTML ="<div style='flex:none;margin:5px 7px 5px 3px;'><img src='{{ user.profile.photo.url }}' style='width:30px;border-radius:50%'></div><span>"
+                           + arr[i] + "</span>";
+
+                          {% endfor %}
+
+
+
+                      /*execute a function when someone clicks on the item value (DIV element):*/
+                      b.addEventListener("click", function(e) {
+                          /*insert the value for the autocomplete text field:*/
+                          inp.value = this.getElementsByTagName("input")[0].value;
+                          /*close the list of autocompleted values,
+                          (or any other open lists of autocompleted values:*/
+                          closeAllLists();
+                          window.location='/'+ inp.value +'/'
+                      });
+                      a.appendChild(b);
+                    }else {
+                        b = document.createElement("DIV");
+                        b.innerText= "查無結果。";
+                        b.setAttribute("class", "search-list-none");
+                        a.appendChild(b);
+                        break
+                    }
+                  }
+              });
+              /*execute a function presses a key on the keyboard:*/
+              inp.addEventListener("keydown", function(e) {
+                  var x = document.getElementById(this.id + "autocomplete-list");
+                  if (x) x = x.getElementsByTagName("a");
+
+                  if (e.keyCode === 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+
+                  } else if (e.keyCode === 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                  } else if (e.keyCode === 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+
+                    if (currentFocus > -1) {
+                      /*and simulate a click on the "active" item:*/
+                      if (x) x[currentFocus].click();
+                    }
+                  }
+              });
+
+              inp.addEventListener("click", function(e) {
+                var a, b, i, c, val = this.value;
+                  /*close any already open lists of autocompleted values*/
+                  closeAllLists();
+                  if (!val) { return false;}
+                  currentFocus = -1;
+                  /*create a DIV element that will contain the items (values):*/
+                  a = document.createElement("DIV");
+                  a.setAttribute("id", this.id + "autocomplete-list");
+                  a.setAttribute("class", "autocomplete-items");
+                  c = document.createElement("DIV");
+                  c.setAttribute("class", "triangle");
+                  /*append the DIV element as a child of the autocomplete container:*/
+                  this.parentNode.appendChild(c);
+                  this.parentNode.appendChild(a);
+                  /*for each item in the array...*/
+
+                  for (i = 0; i < arr.length; i++) {
+                    if (arr[i].toUpperCase().match(val.toUpperCase())) {
+                      /*create a DIV element for each matching element:*/
+                      b = document.createElement("A");
+                      b.setAttribute("href","/"+ arr[i]+"/");
+                      b.setAttribute("class", "search-list");
+
+                      {% for user in users %}
+
+                      b.innerHTML ="<div style='flex:none;margin:5px 7px 5px 3px;'><img src='{{ user.profile.photo.url }}' style='width:30px;border-radius:50%'></div><span>"
+                           + arr[i] + "</span>";
+                          {% endfor %}
+
+
+
+                      /*execute a function when someone clicks on the item value (DIV element):*/
+                      b.addEventListener("click", function(e) {
+                          /*insert the value for the autocomplete text field:*/
+                          inp.value = this.getElementsByTagName("input")[0].value;
+                          /*close the list of autocompleted values,
+                          (or any other open lists of autocompleted values:*/
+                          closeAllLists();
+                          window.location='/'+ inp.value +'/'
+                      });
+                      a.appendChild(b);
+                    }else {
+                        b = document.createElement("DIV");
+                        b.innerText= "查無結果。";
+                        b.setAttribute("class", "search-list-none");
+                        a.appendChild(b);
+                        break
+                    }
+                  }
+              });
+
+              function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("search-list-active");
+              }
+              function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                  x[i].classList.remove("search-list-active");
+                }
+              }
+
+
+              function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var y = document.getElementsByClassName("triangle");
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                  if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                    y[i].parentNode.removeChild(y[i]);
+                  }
+                }
+              }
+              /*execute a function when someone clicks in the document:*/
+              document.addEventListener("click", function (e) {
+                  closeAllLists(e.target);
+              });
+            }
+
+            /*An array containing all the country names in the world:*/
+            var countries = [
+                {% for user in users %}
+                    "{{ user }}",
+                {% endfor %}
+            ];
+            /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+            autocomplete(document.getElementById("mySearch"), countries);
+            </script>
+
+
                     {% if request.user.is_authenticated %}
-                        <div class="user2" style="">
-                            <a href="/explore/"><img src="../../media/explore.png" class="header-image"></a>
-                            <span style="cursor: pointer" onclick="myFunction2()"><a type="button" ><img src="../../media/heart.png" class="header-image"></a></span>
-                            <a href="/{{ request.user }}/"><img src="../../media/personal.png" class="header-image"></a>
+                        <div class="user2" style="flex: none;display: flex;justify-content: flex-end;max-width: 39%;text-align: right;width: 100%">
+                            <a href="/explore/"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/explore.png" class="header-image"></a>
+                            <span style="cursor: pointer" onclick="myFunction2()"><a type="button" ><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/heart.png" class="header-image"></a></span>
+                            <a href="/{{ request.user }}/"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/personal.png" class="header-image"></a>
                         </div>
-                        <span id="myDIV">
+                        <span id="myDIV" style="background-color: #2f323d">
                             <a>貼文活動紀錄<br/>
                                 有人對你的貼文按讚或留言時，就會顯示在這裡。</a>
                         </span>
-
                     {% else %}
                         <span class="user3">
                             <a href="/accounts/login/"><button class="button-login-follow">登入</button></a>
@@ -57,6 +345,7 @@
                     {% endif %}
 
         </div>
+
         {% if messages %}
          <ul class="messages">
            {% for message in messages %}
@@ -71,6 +360,28 @@
             {% block content %}
             {% endblock %}
         </div>
+        {% if request.user.is_authenticated %}
+
+    {% else %}
+    <div id="unlogin" style="position: fixed;left: 0;bottom: 0;opacity:0.9;width: 100%;height: 72px;padding: 21px 16px;background-color: black">
+        <button onclick="document.getElementById('unlogin').style.display='none'" style="position: absolute;right: 40px;bottom: 70px;width: 40px;height: 40px;border: none;opacity:0.7;background-color: black;cursor: pointer">X</button>
+        <div style="display: flex;justify-content: center;width: 903px;margin: auto">
+            <div style="flex: none">
+                <span>
+                    <img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/kar.png" style="width: 56px">
+                </span>
+            </div>
+            <div style="flex: none;margin-left: 20px">
+                <div style="margin-bottom: 10px;width: 711px;font-weight: bold">登入Mate</div>
+                <div style="width: 711px">登入即可查看朋友的相片和影片，並發掘其他吸引你的用戶。</div>
+            </div>
+            <div>
+                <a href="/accounts/login/" style="display: flex"><button class="button-login-follow" style="width: 112px">登入</button></a>
+                <a href="/accounts/register/" class="button-register" style="display: flex;justify-content: center">註冊</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
         <!-- Remember to include jQuery :) -->
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
@@ -105,12 +416,13 @@
 
             function myFunction() {
               if (window.pageYOffset > sticky) {
+
                 header.classList.add("sticky");
-                  $('.logo').hide();
-                  $('.header-image').show()
+                  document.getElementById("logo").style.color = "#17181c";
+                  $('.header-image').show();
               } else {
                 header.classList.remove("sticky");
-                $('.logo').show();
+                document.getElementById("logo").style.color = "white";
               }
             }
 
@@ -126,14 +438,20 @@
 
             function init() {
                 var mySearch = document.getElementById("mySearch");
+                var search_icon = document.getElementById("fa-search");
                 mySearch.style.textAlign = "center";
+
                 var searchfocus = function () {
-                    this.style.textAlign = "left"
+                    this.style.textAlign = "left";
+                    search_icon.style.position = 'relative';
+                    search_icon.style.left = "30px"
                 };
                 mySearch.addEventListener("focus", searchfocus);
 
                 var searchblur = function () {
-                    this.style.textAlign = "center"
+                    this.style.textAlign = "center";
+                    search_icon.style.position = 'relative';
+                    search_icon.style.left = "114px"
                 };
                 mySearch.addEventListener("blur", searchblur);
             }

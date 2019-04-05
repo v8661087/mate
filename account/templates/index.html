@@ -4,6 +4,11 @@
 {% block title %}Mate{% endblock %}
 
 {% block content %}
+    <style>
+        .modal{
+            display: none;
+        }
+    </style>
     <div class="container">
         <div class="sidebar_left">
         {% if actions %}
@@ -21,7 +26,7 @@
 
         <div class="sidebar_right">
 
-                <a href="/{{ request.user }}"><img src="{{ request.user.profile.photo.url }}" class="index-request-user"></a>
+                <a href="/{{ request.user }}"><img src="{{ request.user.profile.photo }}" class="index-request-user"></a>
 
                 <p><a href="/{{ request.user }}" id="index-request-username">{{ request.user }}</a></p>
 
@@ -37,30 +42,37 @@
 {% endblock %}
 
 {% block domready %}
-    var page = 1;
-    var empty_page = false;
-    var block_request = false;
 
-    $(window).scroll(function() {
-        var margin = $(document).height() - $(window).height() - 200;
-        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
-		    block_request = true;
-		    page += 1;
-		    $.get('?page=' + page, function(data) {
-		        if(data == '')
-		        {
-		            empty_page = true;
-		        }
-		        else {
-                    block_request = false;
-                    $('#action-list').append(data);
-    	        }
-            });
-    	}
+{% for action in actions %}
+    {% for user in action.target.users_like.all %}
+         $('#user{{ user }}').click(function(e){
+        e.preventDefault();
+        $.post('{% url "user_follow" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('#user{{ user }}').data('action');
+
+
+                    // toggle data-action
+                    $('#user{{ user }}').data('action', previous_action == '追蹤' ? '已追蹤' : '追蹤');
+
+                    // toggle link text
+                   $('#user{{ user }}').text(previous_action == '追蹤' ? '已追蹤' : '追蹤');
+
+
+        }
+
+        });
+
     });
+    {% endfor %}
 
-
-    $('a.like').click(function(e){
+    $('#images_{{ action.target.id }}').click(function(e){
         e.preventDefault();
         $.post('{% url "images:like" %}',
             {
@@ -70,19 +82,69 @@
             function(data){
                 if (data['status'] == 'ok')
                 {
-                    var previous_action = $('a.like').data('action');
+                    var previous_action = $('#images_{{ action.target.id }}').data('action');
 
                     // toggle data-action
-                    $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                    $('#images_{{ action.target.id }}').data('action', previous_action == 'like' ? 'unlike' : 'like');
                     // toggle link text
-                    $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+                    $('#images_{{ action.target.id }}').text(previous_action == 'like' ? 'Unlike' : 'Like');
 
                     // update total likes
-                    var previous_likes = parseInt($('span.count .total').text());
-                    $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+                    var previous_likes = parseInt($('#total{{ action.target.id }}').text());
+                    $('#total{{ action.target.id }}').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
                 }
         });
 
     });
+
+
+        {% for comment in action.target.comments.all %}
+            $('#comment_like_button_{{ comment.id }}').click(function(e){
+                e.preventDefault();
+                $.post('{% url "images:comment_like" %}',
+                    {
+                        id: $(this).data('id'),
+                        action: $(this).data('action')
+                    },
+                    function(data){
+                        if (data['status'] == 'ok')
+                        {
+
+                            var previous_action = $('#comment_like_button_{{ comment.id }}').data('action');
+
+                            // toggle data-action
+                            $('#comment_like_button_{{ comment.id }}').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                            // toggle link text
+                            $('#comment_like_button_{{ comment.id }}').text(previous_action == 'like' ? 'Unlike' : 'Like');
+
+                            }
+                });
+
+            });
+        {% endfor %}
+
+    $('#saved{{ action.target.id }}').click(function(e){
+        e.preventDefault();
+        $.post('{% url "images:saved" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('#saved{{ action.target.id }}').data('action');
+
+                    // toggle data-action
+                    $('#saved{{ action.target.id }}').data('action', previous_action == 'saved' ? 'unsaved' : 'saved');
+                    // toggle link text
+                    $('#saved{{ action.target.id }}').text(previous_action == 'saved' ? 'Unsaved' : 'Saved');
+
+
+                }
+        });
+
+    });
+{% endfor %}
 
 {% endblock %}

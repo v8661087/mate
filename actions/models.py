@@ -34,8 +34,8 @@ class Action(models.Model):
         if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
             seconds = diff.seconds
 
-            if seconds == 1:
-                return str(seconds) + "秒前"
+            if seconds == 0:
+                return "現在"
 
             else:
                 return str(seconds) + "秒前"

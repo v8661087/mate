@@ -6,9 +6,12 @@
 {% endblock %}
 
 {% block content %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <style>
-
+@media (max-width: 732px) {
+    #content {margin: 75px auto}
+}
 
 /* The Modal (background) */
 .modal {
@@ -34,16 +37,14 @@
 </style>
 
     <div class="user-container">
-        <div class="user-head">
-            <div>
+        <header class="user-head" style="display: flex;text-align: center;width: 100%">
+            <div style="max-width: 290px;width: 30%;height: 150px;flex: none;margin-right: 30px">
                 {% if request.user == user %}
                     <form action="" method="post" enctype="multipart/form-data" id="form2">
                         <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
                         <input type="checkbox" name="photo-clear" id="photo-clear_id"  style="display: none" onchange="submit()">
                         {% csrf_token %}
                     </form>
-
-
                         <script>
                             function photo() {
                                 $("#id_photo").click();
@@ -57,10 +58,10 @@
 
                         </script>
 
-                        {% if user.profile.photo == 'users/default.jpg'  %}
-                            <img src="{{ user.profile.photo.url }}" onclick="photo()" style="cursor: pointer" class="userdetail-profile-photo" title="更換大頭貼照">
+                        {% if user.profile.photo == 'https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg'  %}
+                            <img src="{{ user.profile.photo }}" onclick="photo()" style="cursor: pointer" class="userdetail-profile-photo" title="更換大頭貼照">
                         {% else %}
-                              <a href="#ex2" rel="modal:open"><img src="{{ user.profile.photo.url }}" class="userdetail-profile-photo"></a>
+                              <a href="#ex2" rel="modal:open"><img src="{{ user.profile.photo }}" class="userdetail-profile-photo"></a>
 
                             <div id="ex2" class="modal">
                                 <h3>變更大頭貼照</h3>
@@ -72,68 +73,97 @@
 
                         {% endif %}
                     {% else %}
-                        <img src="{{ user.profile.photo.url }}" class="userdetail-profile-photo">
+                        <img src="{{ user.profile.photo }}" class="userdetail-profile-photo">
                     {% endif %}
 
 
             </div>
-            <div class="userdetail-profile">
-                <p><a style="font-size: x-large">{{ user }}</a>
+            <section class="userdetail-profile" style="flex: none;width: 70%;max-width: 613px">
+                <div style="margin: 0 0 20px;display: flex">
+                <h1 style="flex: none;margin: 0">{{ user }}</h1>
 
                 {% if request.user == user %}
-                    <a href="/accounts/edit/" class="edit">編輯個人檔案</a>
+                    <a href="/accounts/edit/" class="edit" style="margin-left: 20px;flex: none">編輯個人檔案</a>
 
                     <!-- Link to open the modal -->
-                    <a href="#ex1" rel="modal:open" type="button"><img src="../../../../media/setting.jpg"></a>
+                    <a href="#ex1" rel="modal:open" type="button" style="margin-left: 20px;flex: none"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/setting.jpg"></a>
                     <!-- Modal HTML embedded directly into document -->
                     <div id="ex1" class="modal">
-                        <button onclick="location.href='/accounts/password_change/'" style="border-bottom: 1px solid #999999">更改密碼</button>
-                        <button onclick="location.href=''" style="border-bottom: 1px solid #999999">名牌</button>
-                        <button onclick="location.href=''" style="border-bottom: 1px solid #999999">授權的應用程式</button>
-                        <button onclick="location.href=''" style="border-bottom: 1px solid #999999">通知</button>
-                        <button onclick="location.href=''" style="border-bottom: 1px solid #999999">隱私設定和帳號安全</button>
-                        <button onclick="location.href='/accounts/logout/'" style="border-bottom: 1px solid #999999">登出</button>
-                        <a href="#" rel="modal:close"><button>取消</button></a>
+                        <button onclick="location.href='/accounts/password_change/'">更改密碼</button>
+                        <button onclick="location.href=''" >名牌</button>
+                        <button onclick="location.href=''" >授權的應用程式</button>
+                        <button onclick="location.href=''" >通知</button>
+                        <button onclick="location.href=''" >隱私設定和帳號安全</button>
+                        <button onclick="location.href='/accounts/logout/'" >登出</button>
+                        <a rel="modal:close"><button style="border-bottom: none">取消</button></a>
                     </div>
-                    </p>
+
                 {% elif request.user.is_authenticated %}
-                    <a href="#"  data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}已{% endif %}追蹤" class="follow button">
+                    <a href="#"  data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}追蹤中{% else %}追蹤{% endif %}" id="follow123" style="display: none;margin-left:20px;flex: none" class="follow button">
                         {% if request.user not in user.followers.all %}
                             追蹤
                         {% else %}
-                            已追蹤
-                        {% endif %}
+                            追蹤中
+                        {% endif %}　
                     </a>
-                {% else %}
-                        <a href="/accounts/login/"><button class="button-login-follow">追蹤</button>
-                            </a>
-                {% endif %}
 
-                    {% if request.user.is_authenticated %}
-                        <p>
-                            <a>{{ user.images_created.all.count }}貼文</a>
-                            <a href="#ex3" rel="modal:open" type="button"><span class="total">{{ user.followers.all.count }}</span>追蹤者</a>
-                            <a href="#ex4" rel="modal:open" type="button">{{ user.following.all.count }}追蹤中</a>
-                        </p>
+                    {% if request.user in user.followers.all %}
+                        <span id="second" style="margin-left: 20px;flex: none"><a href="#exfollow" rel="modal:open" class="button">追蹤中</a></span>
+
                     {% else %}
-                        <p>
-                            <a href="#ex5" rel="modal:open" type="button">{{ user.images_created.all.count }}貼文</a>
-                            <a href="#ex5" rel="modal:open" type="button">{{ user.followers.all.count }}追蹤者</a>
-                            <a href="#ex5" rel="modal:open" type="button">{{ user.following.all.count }}追蹤中</a>
-                        </p>
+                        <span id="second" style="margin-left: 20px;flex: none"><a onclick="follow_to_unfollow()" class="button" style="cursor: pointer">追蹤</a></span>
                     {% endif %}
 
-                    <div id="ex3" class="modal" style="padding: 15px">
+                        <div id="exfollow" class="modal" style="">
+                            <div style="height: 100px;padding: 35px 0px 0px 0px">
+                                <img src="{{ user.profile.photo }}" style="width: 90px;border-radius: 50%">
+                            </div>
+                            <div style="border-bottom: 1px solid #b1b1b1;padding:20px">
+                                <a>取消追蹤@{{ user }}?</a>
+                            </div>
+                            <a  onclick="follow_to_unfollow()" rel="modal:close"><button style="color: #ff0000 ">取消追蹤</button></a>
+                            <a href="#exfollow" rel="modal:close"><button>取消</button></a>
+                        </div>
+                    <script>
+                    function follow_to_unfollow() {
+                        $('#follow123').click();
+                        if (document.getElementById('second').innerHTML === '<a onclick="follow_to_unfollow()" class="button" style="cursor: pointer">追蹤</a>'){
+                            document.getElementById('second').innerHTML = '<a href="#exfollow" rel="modal:open" class="button">追蹤中</a>'
+                        }else{
+                            document.getElementById('second').innerHTML = '<a onclick="follow_to_unfollow()" class="button" style="cursor: pointer">追蹤</a>'
+                        }
+                    }
+                    </script>
+                {% else %}
+                        <a href="/accounts/login/" style="margin-left: 20px;flex: none"><button class="button-login-follow">追蹤</button></a>
+                {% endif %}
+                </div>
+                <ul style="padding:0; margin:0 0 20px;list-style-type: none;display: flex">
+                    {% if request.user.is_authenticated %}
+
+                            <li style="flex: none;margin-right: 39px"><a>{{ user.images_created.all.count }}貼文</a></li>
+                            <li style="flex: none;margin-right: 39px"><a href="#ex3" rel="modal:open" type="button"><span class="total">{{ user.followers.all.count }}</span>追蹤者</a></li>
+                            <li style="flex: none;margin-right: 39px"><a href="#ex4" rel="modal:open" type="button">{{ user.following.all.count }}追蹤中</a></li>
+
+                    {% else %}
+
+                            <li style="flex: none;margin-right: 39px"><a href="#ex5" rel="modal:open" type="button">{{ user.images_created.all.count }}貼文</a></li>
+                            <li style="flex: none;margin-right: 39px"><a href="#ex5" rel="modal:open" type="button">{{ user.followers.all.count }}追蹤者</a></li>
+                            <li style="flex: none;margin-right: 39px"><a href="#ex5" rel="modal:open" type="button">{{ user.following.all.count }}追蹤中</a></li>
+
+                    {% endif %}
+                </ul>
+                    <div class="modal" id="ex3" style="height: 500px;padding: 15px;display: none">
                      <a>粉絲</a><a class="close" href="#" rel="modal:close">&times;</a>
                      <hr/>
 
                         {% for x in user.followers.all %}
                             {% if user != x %}
                             <li style="list-style-type: none">
-                                <div style="display: flex;margin: 10px">
+                                <div style="display: flex;margin: 0px 10px">
                                     <div>
                                          <a href="/{{ x }}/" style="">
-                                             <img src="{{ x.profile.photo.url }}" class="follow-image">
+                                             <img src="{{ x.profile.photo }}" class="follow-image">
                                          </a>
                                     </div>
                                     <div style="width: 100%;max-width: 340px;">
@@ -142,7 +172,7 @@
                                                 <a href="/{{ x }}/" style="">{{ x }}</a>
                                             </div>
 
-                                            <div style="display: flex;color: #424242">
+                                            <div style="display: flex;">
                                                 {{ x.profile.full_name }}
                                             </div>
                                         {% else %}
@@ -151,15 +181,48 @@
                                             </div>
                                         {% endif %}
                                     </div>
+
                                 {% if x != request.user %}
                                     <div style="width:100px; margin-top: 10px">
-                                        <a href="#" style="" data-id="{{ x.id }}" data-action="{% if x in request.user.following.all %} 已{% endif %}追蹤" class="follow2 button">
-                                        {% if x not in request.user.following.all %}
-                                            追蹤
-                                        {% else %}
-                                            已追蹤
-                                        {% endif %}
+                                        <a href="#" style="display: none" data-id="{{ x.id }}" data-action="{% if x in request.user.following.all %}追蹤中{% else %}追蹤{% endif %}" class="follow2 button" id="x{{ x.id }}">
+                                            {% if x not in request.user.following.all %}
+                                                追蹤
+                                            {% else %}
+                                                追蹤中
+                                            {% endif %}
                                         </a>
+                                    {% if x in request.user.following.all %}
+                                        <span id="second{{ x }}"><a href="#exfollower{{ x }}" class="button">追蹤中</a></span>
+                                    {% else %}
+                                        <span id="second{{ x }}"><a onclick="follow_to_unfollow{{ x }}()" class="button" style="cursor: pointer">追蹤</a></span>
+                                    {% endif %}
+                                        <div id="exfollower{{ x }}" class="modal" style="display: none">
+                                            <div style="height: 100px;padding: 35px 0px 0px 0px">
+                                                <img src="{{ x.profile.photo }}" style="width: 90px;border-radius: 50%">
+                                            </div>
+                                            <div style="border-bottom: 1px solid #b1b1b1;padding:20px">
+                                                取消追蹤@{{ x }}?
+                                            </div>
+                                            <a href="#" onclick="follow_to_unfollow{{ x }}()" rel="modal:close"><button style="color: #ff0000 ">取消追蹤</button></a>
+                                            <a href="#" rel="modal:close"><button>取消</button></a>
+                                        </div>
+                                    <script>
+                                        function follow_to_unfollow{{ x }}() {
+                                            $('#x{{ x.id }}').click();
+                                            if (document.getElementById('second{{ x }}').innerHTML === '<a onclick="follow_to_unfollow{{ x }}()" class="button" style="cursor: pointer">追蹤</a>'){
+                                                document.getElementById('second{{ x }}').innerHTML = '<a href="#exfollower{{ x }}" class="button">追蹤中</a>'
+                                            }else{
+                                                document.getElementById('second{{ x }}').innerHTML = '<a onclick="follow_to_unfollow{{ x }}()" class="button" style="cursor: pointer">追蹤</a>'
+                                            }
+                                        }
+
+                                          $('a[href="#exfollower{{ x }}"]').click(function() {
+                                            $(this).modal({
+                                              closeExisting: false
+                                            })
+                                          })
+
+                                    </script>
                                     </div>
                                 {% endif %}
                                 </div>
@@ -168,16 +231,16 @@
                         {% endfor %}
                     </div>
 
-                    <div id="ex4" class="modal" style="padding: 15px">
+                    <div id="ex4" class="modal" style="height: 500px;padding: 15px">
                      <a>追蹤名單</a><a class="close" href="#" rel="modal:close">&times;</a>
                        <hr/>
                         {% for y in user.following.all %}
                             {% if user != y %}
                             <li style="list-style-type: none">
-                                <div style="display: flex;margin: 10px">
+                                <div style="display: flex;margin: 0px 10px">
                                     <div>
                                          <a href="/{{ y }}/" style="">
-                                             <img src="{{ y.profile.photo.url }}" class="follow-image">
+                                             <img src="{{ y.profile.photo }}" class="follow-image">
                                          </a>
                                     </div>
                                     <div style="width: 100%;max-width: 340px;">
@@ -186,7 +249,7 @@
                                                     <a href="/{{ y }}/" style="">{{ y }}</a>
                                                 </div>
 
-                                                <div style="display: flex;color: #424242">
+                                                <div style="display: flex;">
                                                     {{ y.profile.full_name }}
                                                 </div>
                                         {% else %}
@@ -197,13 +260,50 @@
                                     </div>
                                 {% if y != request.user %}
                                     <div style="width:100px; margin-top: 10px">
-                                        <a href="#" style="" data-id="{{ y.id }}" data-action="{% if y in request.user.following.all %} 已{% endif %}追蹤" class="follow2 button">
+                                        <a href="#" style="display: none" data-id="{{ y.id }}" data-action="{% if y in request.user.following.all %}追蹤中{% else %}追蹤{% endif %}" class="follow2 button" id="{{ y }}">
                                         {% if y not in request.user.following.all %}
                                             追蹤
                                         {% else %}
-                                            已追蹤
+                                            追蹤中
                                         {% endif %}
                                         </a>
+                                    {% if y in request.user.following.all %}
+                                        <span id="second1{{ y }}"><a href="#exfollowing1{{ y }}" class="button">追蹤中</a></span>
+                                    {% else %}
+                                        <span id="second1{{ y }}"><a onclick="follow_to_unfollow1{{ y }}()" class="button" style="cursor: pointer">追蹤</a></span>
+                                    {% endif %}
+                                        <div id="exfollowing1{{ y }}" class="modal"  style="display: none">
+                                            <div style="height: 100px;padding: 35px 0px 0px 0px">
+                                                <img src="{{ y.profile.photo}}" style="width: 90px;border-radius: 50%">
+                                            </div>
+                                            <div style="border-bottom: 1px solid #b1b1b1;padding:20px">
+                                                取消追蹤@{{ y }}?
+                                            </div>
+                                            <a href="#" onclick="follow_to_unfollow1{{ y }}()" rel="modal:close"><button style="color: #ff0000 ">取消追蹤</button></a>
+                                            <a href="#" rel="modal:close"><button>取消</button></a>
+                                        </div>
+                                    <script>
+                                        function follow_to_unfollow1{{ y }}() {
+                                            $('#{{ y.id }}').click();
+                                            if (document.getElementById('second1{{ y }}').innerHTML === '<a onclick="follow_to_unfollow1{{ y }}()" class="button" style="cursor: pointer">追蹤</a>'){
+                                                document.getElementById('second1{{ y }}').innerHTML = '<a href="#exfollowing1{{ y }}" class="button">追蹤中</a>'
+                                            }else{
+                                                document.getElementById('second1{{ y }}').innerHTML = '<a onclick="follow_to_unfollow1{{ y }}()" class="button" style="cursor: pointer">追蹤</a>'
+                                            }
+                                        }
+
+                                        $(function() {
+
+                                          $('a[href="#exfollowing1{{ y }}"]').click(function(event) {
+                                            event.preventDefault();
+                                            $(this).modal({
+                                              closeExisting: false
+                                            });
+                                          });
+
+                                        });
+
+                                    </script>
                                     </div>
                                 {% endif %}
                                 </div>
@@ -212,16 +312,34 @@
                         {% endfor %}
                     </div>
 
-                    <div id="ex5" class="modal">
-                        <a href="/accounts/login/">登入即可在Mate探索你的世界。</a>
-                        <a href="/accounts/login/"><button>登入</button></a>
-                        <a href="/accounts/register/"><button>註冊</button></a>
+                    <div id="ex5" class="modal" style="padding: 0 36px;max-width: 400px;max-height: 369px">
+                        <div style="margin: 28px 0 24px;height: 78px">
+                            <div style="height: 78px">
+                                <span>
+                                    <img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/kar.png" style="width: 54px;padding-top: 24px">
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px">
+                            <a href="/accounts/login/">登入即可在Mate探索你的世界。</a>
+                        </div>
+                        <div style="margin-bottom: 10px">
+                            <a href="/accounts/login/"><button style="border: none;border-radius: 5px;background-color: #0e6ac0;padding: 12px 18px">登入</button></a>
+                        </div>
+                        <div style="margin-bottom: 10px">
+                            <a href="/accounts/register/" style="color: #00a4fa;display:block;;width: 100%">註冊</a>
+                        </div>
+                        <div style="padding: 16px 0">
+                            <a rel="modal:close" ><button style="border: none;padding: 0">稍後再說</button></a>
+                        </div>
+
                     </div>
-                    <p><a>{{ user.profile.full_name }}</a></p>
+                    <div>
+                        <a>{{ user.profile.full_name }}</a>
+                    </div>
 
-
-            </div>
-        </div>
+            </section>
+        </header>
     <div class="user-bottom">
 
             <div class="userdetail-button" style="border-top: 1px solid #989898;height: 52px">
@@ -232,14 +350,14 @@
                     <a href="tagged"><span><img src="../../../../media/my.png"><span class="detail-button">已標註</span></span></a>
                 {% else %}
                     <a href="" style="border-top: 2px solid white;padding-top: 11px"><span style="height: 52px"><img src="../../../../media/post.png"><span class="detail-button">貼文</span></span></a>
-                    <a href="/accounts/login/"><span><img src="../../../../media/my.png"><span class="detail-button">已標註</span></span></a>
+                    <a href="#ex5" rel="modal:open" type="button"><span><img src="../../../../media/my.png"><span class="detail-button">已標註</span></span></a>
                 {% endif %}
 
             </div>
             {% if request.user == user %}
             <p><a href="/images/create/">新增相片</a></p>
             {% endif %}
-                <div id="image-list">
+                <div id="" style="display: flex;flex-direction: row;flex-wrap: wrap;width: 100%;">
                     {% include "images/image/list_ajax.html" with images=user.images_created.all %}
                 </div>
         </div>
@@ -260,9 +378,10 @@
                     var previous_action = $('a.follow').data('action');
 
                     // toggle data-action
-                    $('a.follow').data('action', previous_action == '追蹤' ? '已追蹤' : '追蹤')
+                    $('a.follow').data('action', previous_action == '追蹤' ? '追蹤中' : '追蹤');
+
                     // toggle link text
-                    $('a.follow').text(previous_action == '追蹤' ? '已追蹤' : '追蹤');
+                    $('a.follow').text(previous_action == '追蹤' ? '追蹤中' : '追蹤');
 
                     // update total followers
                     var previous_followers = parseInt($('span.total').text());
@@ -270,8 +389,8 @@
                 }
         });
     });
-
-    $('a.follow2').click(function(e){
+    {% for x in user.followers.all %}
+    $('#{{ x.id }}').click(function(e){
         e.preventDefault();
         $.post('{% url "user_follow" %}',
             {
@@ -281,25 +400,49 @@
             function(data){
                 if (data['status'] == 'ok')
                 {
-                    var previous_action = $('a.follow2').data('action');
+                    var previous_action = $('#{{ x.id }}').data('action');
 
 
                     // toggle data-action
-                    $('a.follow2').data('action', previous_action == '追蹤' ? '已追蹤' : '追蹤')
+                    $('#{{ x.id }}').data('action', previous_action == '追蹤' ? '追蹤中' : '追蹤')
 
                     // toggle link text
-                    $('a.follow2').text(previous_action == '追蹤' ? '已追蹤' : '追蹤');
+                    $('#{{ x.id }}').text(previous_action == '追蹤' ? '追蹤中' : '追蹤');
 
-                    // update total followers
-                    var previous_followers = parseInt($('span.total').text());
-                    $('span.total').text(previous_action == '追蹤' ? previous_followers + 1 : previous_followers - 1)
 
         }
 
         });
 
     });
+    {% endfor %}
+
+    {% for y in user.following.all %}
+    $('#{{ y }}').click(function(e){
+        e.preventDefault();
+        $.post('{% url "user_follow" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok')
+                {
+                    var previous_action = $('#{{ y }}').data('action');
 
 
+                    // toggle data-action
+                    $('#{{ y }}').data('action', previous_action == '追蹤' ? '追蹤中' : '追蹤')
+
+                    // toggle link text
+                    $('#{{ y }}').text(previous_action == '追蹤' ? '追蹤中' : '追蹤');
+
+
+        }
+
+        });
+
+    });
+    {% endfor %}
 
 {% endblock %}

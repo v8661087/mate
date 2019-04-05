@@ -6,8 +6,6 @@ body {
 
 }
 
-
-
 a {
     color: #d1d1d1;
     text-decoration:none;
@@ -18,15 +16,10 @@ a {
 
 
 
-h1 {
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
-    margin:10px 0 20px 0;
-    color:#fff;
-}
+
 
 h3 {
-    border-bottom:1px solid #bbb;
+    border-bottom:1px solid #595959;
     padding:10px ;
 
     color:#fff;
@@ -44,7 +37,7 @@ h3 {
 }
 .header-image-and-logo {
     display: flex;
-    max-width: 200px;
+
     width: 100%
 }
 .image-logo{
@@ -53,7 +46,7 @@ h3 {
     margin-right: 20px;
 }
 
-#header .logo {
+.logo {
     font-family: 'Muli', sans-serif;
     color: #f9f9f9;
     font-size:25px;
@@ -83,20 +76,22 @@ h3 {
 }
 
 #header .user2 {
-
-
     flex: none;
+    display: flex;
     justify-content: flex-end;
+    max-width: 33%;text-align: right;
+    width: 100%;
+    flex: none;
     flex-direction: row;
-    max-width: 300px;
-    min-width: 200px;
-
-
 }
 
 #header .user3 {
-    float: right;
+    flex: none;
     display: flex;
+    justify-content: flex-end;
+    max-width: 33%;
+    text-align: right;
+    width: 100%;
     flex-direction: row;
     padding-top:4px;
     color: #fff;
@@ -112,6 +107,7 @@ h3 {
 #content {
     margin:75px 45px;
     color: #e5e5e5;
+    justify-content: center;
 
 }
 
@@ -234,17 +230,20 @@ ul.messages li a.close {
 
 .userdetail-profile-photo {
     border-radius:50%;
-    width: 200px;
-    float: left;
+    width: 150px;
 }
 
-
+.userdetail-profile{
+    max-width: 613px;
+    width: 100%;
+    height: 150px;
+    text-align: left;
+}
 .userdetail-profile p{
-    margin-left: 300px;
-    line-height: 30px;
+
 }
 .userdetail-profile a{
-    margin-left: 40px;
+
 }
 
 .userdetail-button{
@@ -252,7 +251,7 @@ ul.messages li a.close {
     justify-content: center;
     vertical-align: center;
     text-align: center;
-    border-top: 1px solid #989898;
+    border-top: 1px solid #595959;
     height: 52px
 }
 
@@ -262,19 +261,31 @@ ul.messages li a.close {
     padding-top: 20px;
     font-size: 16px;
 }
-@media (max-width: 400px) {
+@media (max-width: 725px) {
     .detail-button{
         display: none;
     }
     .userdetail-button{
-        border-bottom: 1px solid #989898;
-    }
-    #content {
-        padding: 0;
+        border-bottom: 1px solid #595959;
     }
     .userdetail-profile-photo{
         width: 77px;
     }
+}
+@media (max-width: 400px) {
+    #content {
+        margin:75px 0;
+    }
+}
+@media  (max-width: 625px){
+             #mySearch { display: none;}
+            #fa-search{display: none;}
+            .autocomplete {display: none;}
+
+        }
+@media (max-width: 1050px) {
+    .sidebar_left{margin: auto}
+    .sidebar_right{display: none}
 }
 .useredit-photo {
     border-radius:50%;
@@ -283,8 +294,12 @@ ul.messages li a.close {
     float: left;
 }
 .user-head {
-    height: 250px;
-    margin-left: 60px;
+    height: 150px;
+    margin-bottom: 90px;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    width: 100%;
 }
 
 .user-bottom{
@@ -297,8 +312,8 @@ ul.messages li a.close {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap-reverse;
-    border: 1px solid white;
-    justify-content: center;
+    border: 1px solid #595959;
+
 }
 
 .image {
@@ -316,7 +331,7 @@ ul.messages li a.close {
 }
 
 .edit {
-    border: 1px solid #a9a9a9;
+    border: 1px solid #595959;
     padding: 5px 10px;
 }
 
@@ -347,7 +362,7 @@ ul.messages li a.close {
     padding:10px;
     border-style: solid;
     border-width: 1px;
-    border-color: #d9d9d9;
+    border-color: #595959;
     margin: 15px;
 
 }
@@ -366,7 +381,7 @@ ul.messages li a.close {
 .form1  {
     border-style: solid;
     border-width: 1px;
-    border-color: #ababab;
+    border-color: #595959;
     max-width: 430px ;
     text-align: center;
     margin: auto;
@@ -376,7 +391,7 @@ ul.messages li a.close {
 .form2  {
     border-style: solid;
     border-width: 1px;
-    border-color: #aeaeae;
+    border-color: #595959;
     max-width: 430px ;
     text-align: center;
     vertical-align: center;
@@ -386,7 +401,7 @@ ul.messages li a.close {
 .setting-form {
     border-style: solid;
     border-width: 1px;
-    border-color: #e7e7e7;
+    border-color: #595959;
     height:100%;
     min-height: 450px;
 }
@@ -396,7 +411,7 @@ ul.messages li a.close {
     float:left;
     border-right-style: solid;
     border-right-width: 1px;
-    border-right-color: #c3c3c3;
+    border-right-color: #595959;
     height: 100%;
 }
 
@@ -468,16 +483,20 @@ ul.messages li a.close {
     border-radius:50%; /* 圓形*/
     float: left;
 }
+.container {
+    display: flex;
+}
 
 .sidebar_left {
-    float:left;
+    flex: none;
     max-width: 750px;
     min-width: 106px;
     width: 100%;
+
 }
 
 .sidebar_right {
-    float: left;
+    flex: none;
     margin-left: 40px;
 }
 
@@ -497,7 +516,7 @@ ul.messages li a.close {
     padding: 15px;
     border-style: solid;
     border-width: 1px;
-    border-color: #c1c1c1;
+    border-color: #595959;
     min-height: 300px;
     margin: 35px 0 0px 0;
 }
@@ -507,7 +526,7 @@ ul.messages li a.close {
     padding: 15px;
     border-style: solid;
     border-width: 1px;
-    border-color: #bcbcbc;
+    border-color: #595959;
     min-height: 300px;
     margin: 20px 0 15px 0;
 }
@@ -525,20 +544,16 @@ ul.messages li a.close {
 
 .action-user{
     font-weight: 600;
-    overflow: hidden;
+
     text-overflow: ellipsis;
     white-space: nowrap;
 
 }
 
 .action-image{
-
     min-width: 106px;
-
     max-width: 750px;
-
     width: 100%;
-
 }
 .explore-users {
 
@@ -550,29 +565,26 @@ ul.messages li a.close {
     width: 100%;
 }
 .image-detail-all{
-
-    border: 1px solid #c4c4c4;
-
-    min-height: 750px;
-
-
+    border: 1px solid #595959;
+    width: 100%;
+    display: flex;
+}
+.image-detail-left {
+    flex: none;
 }
 
 .image-detail {
-    float: left;
     width: 100%;
-    height: 100%;
     min-width: 200px;
     max-width: 750px;
+    max-height: 1080px;
 }
-.image-info {
-    float: left;
-    margin-left: 35px;
-    height: 500px;
 
+.image-detail-right {
+    flex: none;
+}
 
-    min-width: 350px;
-
+@media (max-width: 920px) {
 
 }
 
@@ -592,16 +604,11 @@ ul.messages li a.close {
 
 .comment {
     overflow: auto;
-
-    max-height: 520px;
-    max-width: 370px;
-    border-bottom: 1px solid #bfbfbf;
 }
 
 .image-detail-header{
-    margin-top: 20px ;
-    height: 60px;
-    border-bottom: 1px solid #aeaeae;
+    height: 40px;
+    border-bottom: 1px solid #595959;
 }
 
 #id_body {
@@ -613,4 +620,10 @@ ul.messages li a.close {
     max-width: 550px;
     font-size: 18px;
 
+}
+
+.image-button {
+    border:0;
+    background-color: #17181c;
+    outline:none;
 }

@@ -16,8 +16,8 @@
         </div>
         <div class="setting-article">
                 <div class="setting-photo-user">
-                {% if user.profile.photo == 'users/default.jpg'  %}
-                            <img src="{{ user.profile.photo.url }}" onclick="photo()" style="cursor: pointer" class="useredit-photo" title="更換大頭貼照">
+                {% if user.profile.photo == 'https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg'  %}
+                            <img src="{{ user.profile.photo }}" onclick="photo()" style="cursor: pointer" class="useredit-photo" title="更換大頭貼照">
                             <a>{{ user }}<br/>
                             <a onclick="photo()" style="color: rgb(0,178,255);cursor: pointer">變更大頭貼照</a>
                             </a><br/>

@@ -14,5 +14,4 @@ urlpatterns = [
     path('manage_access/', views.manage_access),
     path('contact_history/', views.contact_history),
     path('privacy_and_security/', views.privacy_and_security),
-
 ]

@@ -13,8 +13,8 @@ class Image(models.Model):
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name=u"標題")
     slug = models.SlugField(max_length=200, blank=True)
-    url = models.URLField(blank=True)
-    image = ResizedImageField(size=[750, 750], quality=100, crop=['middle', 'left'], upload_to='images/%Y/%m/%d', verbose_name=u"相片")
+    url = models.URLField(verbose_name=u"網址")
+ #   image = ResizedImageField(size=[750, 750], quality=100, crop=['middle', 'left'], upload_to='images/%Y/%m/%d', verbose_name=u"相片")
     description = models.TextField(blank=True, verbose_name=u"描述")
     created = models.DateTimeField(auto_now_add=True,
                                    db_index=True)
@@ -105,7 +105,9 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True,
                                    db_index=True)
     updated = models.DateTimeField(auto_now=True)
-
+    liked = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                        related_name='comments_liked',
+                                        blank=True)
 
 
     class Meta:
@@ -114,4 +116,48 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment by {} on {}'.format(self.user, self.post)
 
+    def when_published(self):
+        now = timezone.now()
 
+        diff = now - self.created
+
+        if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
+            seconds = diff.seconds
+
+            if seconds == 0:
+                return "現在"
+
+            else:
+                return str(seconds) + "秒"
+
+        if diff.days == 0 and diff.seconds >= 60 and diff.seconds < 3600:
+            minutes = math.floor(diff.seconds / 60)
+
+            if minutes == 1:
+                return str(minutes) + "分"
+
+            else:
+                return str(minutes) + "分"
+
+        if diff.days == 0 and diff.seconds >= 3600 and diff.seconds < 86400:
+            hours = math.floor(diff.seconds / 3600)
+
+            if hours == 1:
+                return str(hours) + "小時"
+
+            else:
+                return str(hours) + "小時"
+
+        # 1 day to 7 days
+        if diff.days >= 1 and diff.days < 7:
+            days = diff.days
+
+            if days == 1:
+                return str(days) + "天"
+
+            else:
+                return str(days) + "天"
+
+        if diff.days >= 7:
+            weeks = math.floor(diff.days / 7)
+            return  str(weeks) + "週"
