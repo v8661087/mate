@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 from django.utils import timezone
 import math
+import random
 
 class Image(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -31,7 +32,7 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self)
+            self.slug = slugify(self) + str(random.randint(1, 100))
         super(Image, self).save(*args, **kwargs)
 
 
