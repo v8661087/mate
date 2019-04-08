@@ -30,7 +30,9 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('photo',)
-
+        widgets = {
+            'photo': forms.HiddenInput,
+        }
 
 class UserEditForm(forms.ModelForm):
     username = forms.CharField(label='用戶名稱')

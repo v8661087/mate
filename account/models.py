@@ -9,7 +9,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
 #    photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True,
  #                             default='users/default.jpg')
-    photo = models.URLField(blank=True, default='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
+    photo = models.URLField(default='https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg')
     full_name = models.CharField(max_length=30, blank=True, verbose_name=u"姓名")
     website = models.URLField(blank=True, verbose_name=u"網站")
     personal_profile = models.TextField(max_length=300, blank=True, verbose_name=u"個人簡介")

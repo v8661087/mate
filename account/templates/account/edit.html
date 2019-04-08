@@ -23,7 +23,7 @@
                             </a><br/>
                 {% else %}
 
-                    <a href="#ex1" rel="modal:open"><img src="{{ user.profile.photo.url }}" class="useredit-photo"></a>
+                    <a href="#ex1" rel="modal:open"><img src="{{ user.profile.photo }}" class="useredit-photo"></a>
                 <!-- Link to open the modal -->
 
                     <a>{{ user }}<br/>
@@ -35,15 +35,20 @@
 
                     <script>
                        function photo() {
-                           $("#id_photo").click();
+                            var person = prompt("請輸入大頭貼圖片網址", "");
+                          if (person != null) {
+                            document.getElementsByTagName("INPUT")[6].setAttribute("value", person) ;
+                          $("#form1").submit()
+                          }
                        }
                         function submit(){
                            $("#form1").submit()
                         }
 
                         function default_image() {
-                            $("#photo-clear_id").click()
-                        }
+                            document.getElementsByTagName("INPUT")[6].setAttribute("value", "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg") ;
+                            $("#form1").submit()
+                       }
                   </script>
                 <div id="ex1" class="modal">
                         <h3>變更大頭貼照</h3>
@@ -54,6 +59,7 @@
 
             <article>
                 <form action="" method="post" enctype="multipart/form-data" id="form1">
+
                     <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
                     <input type="checkbox" name="photo-clear" id="photo-clear_id"  style="display: none" onchange="submit()" >
                     {{ otherprofile_form.full_name.label }}：{{ otherprofile_form.full_name }}
@@ -61,6 +67,7 @@
                     {{ otherprofile_form.website.label }}：{{ otherprofile_form.website }}
                     {{ otherprofile_form.personal_profile.label }}：{{ otherprofile_form.personal_profile }}
                     <p>私人資料</p>
+                    {{ profile_form.photo }}
                     {{ user_form.email.label }}：{{ user_form.email }}
                     {{ otherprofile_form.phone_number.label }}：{{ otherprofile_form.phone_number }}
                     {{ otherprofile_form.gender.label }}<br/>

@@ -231,6 +231,7 @@ ul.messages li a.close {
 .userdetail-profile-photo {
     border-radius:50%;
     width: 150px;
+    height: 150px;
 }
 
 .userdetail-profile{
@@ -270,6 +271,7 @@ ul.messages li a.close {
     }
     .userdetail-profile-photo{
         width: 77px;
+        height: 77px;
     }
 }
 @media (max-width: 400px) {
@@ -291,6 +293,7 @@ ul.messages li a.close {
     border-radius:50%;
     margin-right: 10px;
     width: 38px;
+    height: 38px;
     float: left;
 }
 .user-head {
@@ -625,4 +628,24 @@ ul.messages li a.close {
     border:0;
     background-color: #17181c;
     outline:none;
+}
+
+#left{
+    position: relative;
+    top:120px;
+    left: 3px;
+    border: none;
+    background-color: black;
+    border-radius: 50%;
+    opacity: 0.5
+}
+
+#right{
+    position: relative;
+    top:120px;
+    left: 1110px;
+    border: none;
+    background-color: black;
+    border-radius: 50%;
+    opacity: 0.5
 }

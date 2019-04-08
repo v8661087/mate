@@ -6,9 +6,10 @@
     <div class="explore-users">
         <p>探索用戶<a href="people/suggested/" style="float: right;color: #0e6ac0">查看全部</a></p>
             <blockquote>推薦用戶<a href="people/suggested/" style="float: right;color: #0e6ac0">查看全部</a></blockquote>
-        <button id="left" style="position: relative;top:120px"> < </button>
-        <button id="right" style="position: relative;top:120px;left: 1110px"> > </button>
-
+        {% if users > 6 %}
+        <button id="left"> < </button>
+        <button id="right"> > </button>
+        {% endif %}
         <div class="people">
             <div id="people-list">
                {% for user in users %}
@@ -28,7 +29,7 @@
 
     <div class="explore">
         <p>探索</p>
-        <div id="image-list" style="border: none">
+        <div id="image-list">
             {% for user in users %}
                 {% include "images/image/list_ajax.html" with images=user.images_created.all %}
             {% endfor %}
@@ -50,4 +51,3 @@
             });
 
 {% endblock %}
-

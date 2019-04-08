@@ -347,7 +347,7 @@
         </div>
 
         {% if messages %}
-         <ul class="messages">
+         <ul class="messages" id="messages">
            {% for message in messages %}
              <li class="{{ message.tags }}">
             {{ message|safe }}
@@ -355,6 +355,13 @@
              </li>
            {% endfor %}
          </ul>
+            <script>
+             var message = document.getElementById("messages");
+            setTimeout(function(){
+               message.style.display = "none";
+            }, 3000);
+
+            </script>
         {% endif %}
         <div id="content">
             {% block content %}

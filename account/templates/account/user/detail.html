@@ -41,19 +41,23 @@
             <div style="max-width: 290px;width: 30%;height: 150px;flex: none;margin-right: 30px">
                 {% if request.user == user %}
                     <form action="" method="post" enctype="multipart/form-data" id="form2">
-                        <input type="file" id="id_photo" name="photo" accept="image/*" style="display: none" onchange="submit()">
-                        <input type="checkbox" name="photo-clear" id="photo-clear_id"  style="display: none" onchange="submit()">
+                        {{ profile_form.photo }}
                         {% csrf_token %}
                     </form>
                         <script>
                             function photo() {
-                                $("#id_photo").click();
+                                var person = prompt("請輸入大頭貼圖片網址", "");
+                              if (person != null) {
+                                document.getElementsByTagName("INPUT")[1].setAttribute("value", person) ;
+                                $("#form2").submit()
+                              }
                             }
                             function submit(){
                                 $("#form2").submit();
                             }
                             function default_image() {
-                                $("#photo-clear_id").click();
+                                document.getElementsByTagName("INPUT")[1].setAttribute("value", "https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/users/default.jpg") ;
+                            $("#form2").submit()
                             }
 
                         </script>
