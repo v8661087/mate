@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcdfdc70-27f3-4c68-8980-f50e4dfb0395" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/static/css/base2.css" beforeDir="false" afterPath="$PROJECT_DIR$/account/static/css/base2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/user/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base2.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/base2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/registration/password_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/registration/password_change.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +125,7 @@
           <entry key="account_user" value="2" />
           <entry key="auth_user" value="6" />
           <entry key="css" value="128" />
-          <entry key="html" value="537" />
+          <entry key="html" value="538" />
           <entry key="js" value="4" />
           <entry key="map" value="1" />
           <entry key="png" value="1" />
@@ -145,7 +138,7 @@
         <counts>
           <entry key="CSS" value="128" />
           <entry key="Database Element" value="12" />
-          <entry key="HTML" value="537" />
+          <entry key="HTML" value="538" />
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="4" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -188,11 +181,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/templates/base2.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="181">
               <caret line="358" column="63" selection-start-line="358" selection-start-column="63" selection-end-line="358" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/account/templates/registration/password_change.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -315,7 +317,6 @@
         <option value="$PROJECT_DIR$/account/templates/account/user/contact_history.html" />
         <option value="$PROJECT_DIR$/actions/my_tags.py" />
         <option value="$PROJECT_DIR$/actions/templatetags/my_tags.py" />
-        <option value="$PROJECT_DIR$/account/templates/registration/password_change.html" />
         <option value="$PROJECT_DIR$/account/templates/account/manage_access.html" />
         <option value="$PROJECT_DIR$/mate/urls.py" />
         <option value="$PROJECT_DIR$/account/templates/explore.html" />
@@ -352,6 +353,7 @@
         <option value="$PROJECT_DIR$/account/templates/account/edit.html" />
         <option value="$PROJECT_DIR$/account/templates/account/user/detail.html" />
         <option value="$PROJECT_DIR$/account/templates/base2.html" />
+        <option value="$PROJECT_DIR$/account/templates/registration/password_change.html" />
       </list>
     </option>
   </component>
@@ -433,6 +435,13 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="account" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mate" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mate" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="registration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mate" type="b2602c69:ProjectViewProjectNode" />
@@ -599,7 +608,7 @@
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50238097" side_tool="true" weight="0.20064725" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49761903" weight="0.20711975" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49761903" visible="true" weight="0.20711975" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32740214" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -639,13 +648,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/account/templates/account/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/account/templates/registration/password_reset_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -951,6 +953,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="358" column="63" selection-start-line="358" selection-start-column="63" selection-end-line="358" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/registration/password_change.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
         </state>
       </provider>
     </entry>
