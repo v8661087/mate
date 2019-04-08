@@ -8,12 +8,12 @@
 
     {% for user in users %}
         {% if user not in request.user.following.all %}
-        {% if user != request.user %}
+            {% if user != request.user %}
                             <li style="list-style-type: none">
                                 <div style="display: flex;margin: 10px">
                                     <div>
                                          <a href="/{{ user }}/" style="">
-                                             <img src="{{ user.profile.photo.url }}" class="follow-image">
+                                             <img src="{{ user.profile.photo }}" class="follow-image">
                                          </a>
                                     </div>
                                     <div style="width: 100%;max-width: 500px;">
@@ -34,7 +34,7 @@
 
                                 {% if user != request.user %}
                                     <div style="width:100px; margin-top: 10px">
-                                        <a href="#" style="" data-id="{{ user.id }}" data-action="{% if user in request.user.following.all %} 已{% endif %}追蹤" class="follow2 button">
+                                        <a href="#" id="{{ user }}" style="" data-id="{{ user.id }}" data-action="{% if user in request.user.following.all %} 已{% endif %}追蹤" class="follow2 button">
                                             {% if user not in request.user.following.all %}
                                             追蹤
                                         {% else %}
@@ -45,8 +45,41 @@
                                 {% endif %}
                                 </div>
                             </li>
-                            {% endif %}
+            {% endif %}
         {% endif %}
-                        {% endfor %}
+    {% endfor %}
 </div>
+{% endblock %}
+
+{% block domready %}
+    {% for user in users %}
+    {% if user not in request.user.following.all %}
+            {% if user != request.user %}
+    $('#{{ user }}').click(function(e){
+        e.preventDefault();
+        $.post('{% url "user_follow" %}',
+            {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function(data){
+                if (data['status'] == 'ok' )
+                {
+                    var previous_action = $('#{{ user }}').data('action');
+
+                    // toggle data-action
+                    $('#{{ user }}').data('action', previous_action == '追蹤' ? '追蹤中' : '追蹤');
+
+                    // toggle link text
+                    $('#{{ user }}').text(previous_action == '追蹤' ? '追蹤中' : '追蹤');
+
+                    // update total followers
+                    var previous_followers = parseInt($('span.total').text());
+                    $('span.total').text(previous_action == '追蹤' ? previous_followers + 1 : previous_followers - 1)
+                }
+        });
+    });
+        {% endif %}
+        {% endif %}
+    {% endfor %}
 {% endblock %}

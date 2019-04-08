@@ -25,9 +25,9 @@
                     {% endif %}
                 {% endif %}
 
-                    <button class="image-button" onclick="comment_focus{{ action.target.id }}()"><img src="../../../../media/message.png" style="cursor: pointer"></button>
+                    <button class="image-button" onclick="comment_focus{{ action.target.id }}()"><img src="https://raw.githubusercontent.com/v8661087/mate/master/media/message.png" style="cursor: pointer"></button>
                     {% if action.user != request.user %}
-                        <button class="image-button"><a href="#share" rel="modal:open"><img src="../../../../media/share.png"></a></button>
+                        <button class="image-button"><a href="#share" rel="modal:open"><img src="https://raw.githubusercontent.com/v8661087/mate/master/media/share.png"></a></button>
                     {% endif %}
                 {% if action.target in request.user.images_saved.all %}
                    <button  class="image-button" style="float: right" onclick="saved_or_unsaved{{ action.target.id }}()"><a style="float: right;cursor: pointer"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved2.png" id="saved_image{{ action.target.id }}"></a></button>

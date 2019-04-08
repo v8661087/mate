@@ -92,7 +92,7 @@
             {% if request.user.is_authenticated %}
                 {% if comments %}
                     <style>
-                        .comment {min-height: 353px;max-height: 500px;height: 30%}
+                        .comment {max-height: 600px;}
                     </style>
                     <div class="comment" style="padding: 16px 20px;overflow-x: hidden">
                         {% if image.description %}
@@ -116,17 +116,17 @@
                             {% endif %}
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
                         <script>
-    $(function () {
-    $("li").slice(-6).show();
-    $("#load_more_comments").on('click', function (e) {
-        e.preventDefault();
-        $("li:hidden").slice(-6).show();
-        if ($("li:hidden").length == 0) {
-            $("#load_more_comments").hide();
-        }
-    });
-});
-</script>
+                            $(function () {
+                            $("li").slice(-6).show();
+                            $("#load_more_comments").on('click', function (e) {
+                                e.preventDefault();
+                                $("li:hidden").slice(-6).show();
+                                if ($("li:hidden").length == 0) {
+                                    $("#load_more_comments").hide();
+                                }
+                            });
+                        });
+                        </script>
 
                         {% for comment in comments %}
                             <li style=";list-style-type: none;padding: 6px 0px;display: none">
@@ -138,7 +138,7 @@
                                         <div style="flex: none;max-width: 309px;width: 100%;padding-top: 6px">
                                             <a href="/{{ comment.user }}/"style="margin:0 10px 0 0px;">{{ comment.user }}</a>
                                             <span>{{ comment.body }}</span>
-                                            <a href="#" data-id="{{ comment.id }}" data-action="{% if request.user in comment.liked.all %}un{% endif %}like" class="comment_like button" id="{{ comment.id }}" style="">
+                                            <a href="#" data-id="{{ comment.id }}" data-action="{% if request.user in comment.liked.all %}un{% endif %}like" class="comment_like button" id="{{ comment.id }}" style="display: none">
                                             {% if request.user not in comment.liked.all %}
                                                 Like
                                             {% else %}
@@ -182,17 +182,17 @@
                             {% endif %}
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
                         <script>
-    $(function () {
-    $("li").slice(-6).show();
-    $("#load_more_comments").on('click', function (e) {
-        e.preventDefault();
-        $("li:hidden").slice(-6).show();
-        if ($("li:hidden").length == 0) {
-            $("#load_more_comments").hide();
-        }
-    });
-});
-</script>
+                            $(function () {
+                            $("li").slice(-6).show();
+                            $("#load_more_comments").on('click', function (e) {
+                                e.preventDefault();
+                                $("li:hidden").slice(-6).show();
+                                if ($("li:hidden").length == 0) {
+                                    $("#load_more_comments").hide();
+                                }
+                            });
+                        });
+                        </script>
 
                         {% for comment in comments %}
                             <li style="list-style-type: none;padding-bottom: 9px;display: none">
@@ -226,9 +226,9 @@
                         {% endif %}
                     {% endif %}
 
-                        <button class="image-button" onclick="comment_focus()"><img src="../../../../media/message.png" style="cursor: pointer"></button>
+                        <button class="image-button" onclick="comment_focus()"><img src="https://raw.githubusercontent.com/v8661087/mate/master/media/message.png" style="cursor: pointer"></button>
                         {% if image.user != request.user %}
-                            <button class="image-button"><a href="#share" rel="modal:open"><img src="../../../../media/share.png"></a></button>
+                            <button class="image-button"><a href="#share" rel="modal:open"><img src="https://raw.githubusercontent.com/v8661087/mate/master/media/share.png"></a></button>
                         {% endif %}
             <span style="float: right">
                     {% if image in request.user.images_saved.all %}
@@ -284,7 +284,7 @@
                         }
                     }
                 function zerolike() {
-                        if (document.getElementById('first').innerHTML === '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">1</span>個讚</span></a>' && document.getElementById('like').innerText === 'UNLIKE'){
+                        if (document.getElementById('first').innerHTML === '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">1</span>個讚</span></a>' && document.getElementById('like').innerText === 'Unlike'){
                             document.getElementById('first').innerHTML = '成為第一個<a onclick="like_or_unlike();firstlike2()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
                         }else {
                             document.getElementById('first').innerHTML = '<a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">0</span>個讚</span></a>'
@@ -310,7 +310,7 @@
             {% else %}
                 <span id="first"><a href="#ex9" rel="modal:open"><span class="count" id="count"><span class="total" id="total">{{ total_likes }}</span>個讚</span></a></span>
             {% endif %}
-                <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button" id="like" style="">{% if request.user not in users_like %}Like{% else %}Unlike{% endif %}</a>
+                <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button" id="like" style="display: none">{% if request.user not in users_like %}Like{% else %}Unlike{% endif %}</a>
                 <div id="ex9" class="modal" style="height: 500px;">
                     <div><p>說讚的用戶</p></div><hr/>
                         <div style="padding: 10px">
@@ -335,7 +335,7 @@
                     </div>
 
 
-                        <a href="#" data-id="{{ image.id }}" data-action="{% if image in user.images_saved.all %}un{% endif %}saved" class="saved button" style="">
+                        <a href="#" data-id="{{ image.id }}" data-action="{% if image in user.images_saved.all %}un{% endif %}saved" class="saved button" style="display: none">
                             {% if image not in user.images_saved.all %}
                                 Saved
                             {% else %}

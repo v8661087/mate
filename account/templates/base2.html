@@ -65,15 +65,14 @@
                 .autocomplete-items {
                   border: 1px solid #d4d4d4;
                   border-bottom: none;
-
-                  z-index: 99;
                   /*position the autocomplete items to be the same width as the container:*/
                   overflow: auto;
                   max-height: 400px;
                   width: 290px;
-
                     margin-left: auto;
                     margin-right: auto;
+                    z-index: 2;
+                    position: fixed;
                 }
 
                 .search-list {
@@ -86,7 +85,7 @@
                   height: 40px;
                   font-size: 18px;
                     display: flex;
-                    z-index: 99;
+
                 }
                 .search-list-none {
                   padding: 10px;
