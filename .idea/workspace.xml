@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcdfdc70-27f3-4c68-8980-f50e4dfb0395" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/static/css/base2.css" beforeDir="false" afterPath="$PROJECT_DIR$/account/static/css/base2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/user/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base2.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/base2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/explore_people_suggested.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/explore_people_suggested.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/account/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/user/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions/templates/actions/action/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/actions/templates/actions/action/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/templates/images/image/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/images/templates/images/image/detail.html" afterDir="false" />
     </list>
@@ -113,15 +110,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Django Console" value="12" />
-          <entry key="css" value="7446" />
-          <entry key="html" value="38767" />
+          <entry key="css" value="7451" />
+          <entry key="html" value="38855" />
           <entry key="py" value="12506" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="7446" />
-          <entry key="HTML" value="38767" />
+          <entry key="CSS" value="7451" />
+          <entry key="HTML" value="38855" />
           <entry key="Python" value="12518" />
         </counts>
       </usages-collector>
@@ -131,7 +128,7 @@
           <entry key="account_user" value="2" />
           <entry key="auth_user" value="6" />
           <entry key="css" value="128" />
-          <entry key="html" value="533" />
+          <entry key="html" value="534" />
           <entry key="js" value="4" />
           <entry key="map" value="1" />
           <entry key="png" value="1" />
@@ -144,7 +141,7 @@
         <counts>
           <entry key="CSS" value="128" />
           <entry key="Database Element" value="12" />
-          <entry key="HTML" value="533" />
+          <entry key="HTML" value="534" />
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="4" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -160,26 +157,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/images/templates/images/image/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="94" column="34" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/templates/account/user/list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="29" />
+            <state relative-caret-position="60">
+              <caret line="153" column="61" selection-start-line="153" selection-start-column="61" selection-end-line="153" selection-end-column="61" />
+              <folding>
+                <element signature="e#9453#9477#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/account/templates/account/user/list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" column="72" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#p#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/account/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="52" column="36" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/static/css/base2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="313" column="19" selection-start-line="313" selection-start-column="19" selection-end-line="313" selection-end-column="19" />
+            <state relative-caret-position="228">
+              <caret line="353" column="15" selection-start-line="353" selection-start-column="15" selection-end-line="353" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -187,17 +201,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="27" column="179" selection-start-line="27" selection-start-column="179" selection-end-line="27" selection-end-column="179" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/templates/base2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1776">
-              <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+            <state relative-caret-position="372">
+              <caret line="207" column="297" selection-start-line="207" selection-start-column="297" selection-end-line="207" selection-end-column="297" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#section#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#li#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -258,9 +268,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user-</find>
-      <find>pro</find>
-      <find>userdetail-profile</find>
       <find>h1</find>
       <find>head</find>
       <find>#content</find>
@@ -281,13 +288,16 @@
       <find>zero</find>
       <find>href=&quot;#&quot; data-id=&quot;{{ image.id }}&quot; data-action=&quot;{% if request.user in users_li</find>
       <find>UNLIKE</find>
-      <find>data</find>
       <find>已標</find>
       <find>取消</find>
       <find>z-</find>
       <find>message</find>
       <find>image-</find>
       <find>if comment</find>
+      <find>image-b</find>
+      <find>inner</find>
+      <find>peo</find>
+      <find>data</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -343,10 +353,10 @@
         <option value="$PROJECT_DIR$/account/templates/account/user/detail.html" />
         <option value="$PROJECT_DIR$/account/templates/explore_people_suggested.html" />
         <option value="$PROJECT_DIR$/account/templates/base2.html" />
-        <option value="$PROJECT_DIR$/actions/templates/actions/action/detail.html" />
         <option value="$PROJECT_DIR$/images/templates/images/image/detail.html" />
-        <option value="$PROJECT_DIR$/account/templates/account/user/list.html" />
+        <option value="$PROJECT_DIR$/actions/templates/actions/action/detail.html" />
         <option value="$PROJECT_DIR$/account/static/css/base2.css" />
+        <option value="$PROJECT_DIR$/account/templates/account/user/list.html" />
       </list>
     </option>
   </component>
@@ -356,7 +366,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="25" />
     <option name="y" value="298" />
     <option name="width" value="1171" />
@@ -594,7 +604,7 @@
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50238097" side_tool="true" weight="0.20064725" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49761903" weight="0.20711975" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49761903" visible="true" weight="0.20711975" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32740214" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -606,7 +616,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3291815" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3291815" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5040453" side_tool="true" weight="0.25266904" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4959547" visible="true" weight="0.27402136" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4959547" visible="true" weight="0.27402136" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3291815" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -816,13 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="28" column="85" selection-start-line="28" selection-start-column="85" selection-end-line="28" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/account/templates/account/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -899,13 +902,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="27" column="179" selection-start-line="27" selection-start-column="179" selection-end-line="27" selection-end-column="179" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/templates/images/image/list_ajax.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -915,22 +911,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/images/templates/images/image/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="94" column="34" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
+        <state relative-caret-position="60">
+          <caret line="153" column="61" selection-start-line="153" selection-start-column="61" selection-end-line="153" selection-end-column="61" />
+          <folding>
+            <element signature="e#9453#9477#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/templates/account/user/list.html">
+    <entry file="file://$PROJECT_DIR$/actions/templates/actions/action/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="29" />
+        <state relative-caret-position="372">
+          <caret line="207" column="297" selection-start-line="207" selection-start-column="297" selection-end-line="207" selection-end-column="297" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#section#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#li#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/account/static/css/base2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="313" column="19" selection-start-line="313" selection-start-column="19" selection-end-line="313" selection-end-column="19" />
+        <state relative-caret-position="228">
+          <caret line="353" column="15" selection-start-line="353" selection-start-column="15" selection-end-line="353" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="52" column="36" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/account/user/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="72" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#p#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

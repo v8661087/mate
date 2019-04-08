@@ -151,7 +151,7 @@
                                                 <button style="border: none;cursor: pointer">回覆</button>
                                             </div>
                                         </div>
-                                <span>
+                                <span style="padding-top: 6px">
                                     {% if request.user in comment.liked.all %}
                                         <button class="image-button" onclick="comment_like_or_unlike{{ comment.id }}()"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/red_heart.png" id="comment_{{ comment.id }}" style="cursor: pointer;width: 15px;padding-top: 3px"></button>
                                     {% else %}

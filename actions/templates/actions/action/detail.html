@@ -34,7 +34,7 @@
                 {% else %}
                     <button  class="image-button" style="float: right" onclick="saved_or_unsaved{{ action.target.id }}()"><a style="float: right;cursor: pointer"><img src="https://raw.githubusercontent.com/v8661087/v8661087.github.io/master/media/saved.png" id="saved_image{{ action.target.id }}"></a></button>
                 {% endif %}
-                <a href="#" data-id="{{ action.target.id }}" data-action="{% if action.target in user.images_saved.all %}un{% endif %}saved" class="saved button" id="saved{{ action.target.id }}" style="">
+                <a href="#" data-id="{{ action.target.id }}" data-action="{% if action.target in user.images_saved.all %}un{% endif %}saved" class="saved button" id="saved{{ action.target.id }}" style="display: none">
                         {% if action.target not in user.images_saved.all %}
                             Saved
                         {% else %}
@@ -64,7 +64,7 @@
                                         <span id="first{{ action.target.id }}"><a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">{{ action.target.users_like.count }}</span>個讚</a></span>
                                     {% endif %}
                                 </span>
-                                <a href="#" data-id="{{ action.target.id }}" data-action="{% if request.user in action.target.users_like.all %}un{% endif %}like" class="like button" style="" id="images_{{ action.target.id }}">{% if request.user not in action.target.users_like.all %}Like{% else %}Unlike{% endif %}</a>
+                                <a href="#" data-id="{{ action.target.id }}" data-action="{% if request.user in action.target.users_like.all %}un{% endif %}like" class="like button" style="display: none" id="images_{{ action.target.id }}">{% if request.user not in action.target.users_like.all %}Like{% else %}Unlike{% endif %}</a>
 
                                 <div id="ex{{ action.target.id }}" class="modal" style="height: 500px;">
                                     <div><p>說讚的用戶</p></div><hr/>
@@ -126,7 +126,7 @@
                     <div style="display: flex">
                             <div style="max-width: 690px;width: 100%;flex: none">
                                 <a href="/{{ comment.user }}/" onload="comment()" style="margin: 0px 5px 0px 0px">{{ comment.user }}</a>{{ comment.body }}
-                                <a href="#" data-id="{{ comment.id }}" data-action="{% if request.user in comment.liked.all %}un{% endif %}like" class="comment_like button" id="comment_like_button_{{ comment.id }}" style="">
+                                <a href="#" data-id="{{ comment.id }}" data-action="{% if request.user in comment.liked.all %}un{% endif %}like" class="comment_like button" id="comment_like_button_{{ comment.id }}" style="display: none">
                                     {% if request.user not in comment.liked.all %}
                                         Like
                                     {% else %}
@@ -205,7 +205,7 @@
                     }
                 }
             function zerolike{{ action.target.id }}() {
-                    if (document.getElementById('first{{ action.target.id }}').innerHTML === '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">1</span>個讚</a>' && document.getElementById('images_{{ action.target.id }}').innerText === 'UNLIKE'){
+                    if (document.getElementById('first{{ action.target.id }}').innerHTML === '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">1</span>個讚</a>' && document.getElementById('images_{{ action.target.id }}').innerText === 'Unlike'){
                         document.getElementById('first{{ action.target.id }}').innerHTML = '成為第一個<a onclick="like_or_unlike{{ action.target.id }}();firstlike2{{ action.target.id }}()" style="cursor: pointer;font-weight: bold"> 說這讚 </a>的人'
                     }else {
                         document.getElementById('first{{ action.target.id }}').innerHTML = '<a href="#ex{{ action.target.id }}" rel="modal:open"><span class="total" id="total{{ action.target.id }}">0</span>個讚</a>'
